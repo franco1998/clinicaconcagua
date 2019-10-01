@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Mapa_P1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
+	.st2{font-family:'Calibri';}
+	.st3{font-size:17px;}
+	.st4{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:10;}
+	.st7{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st8{fill:#FFFFFF;stroke:#000000;stroke-width:1.1564;stroke-miterlimit:10;}
+</style>
+<g id="H1-6_1_">
+	<g id="H1-6">
+		<g id="XMLID_5_">
+			<g>
+				<polygon class="st0" points="342.1,213.1 342.1,399 220.2,399 220.2,213.2 220.2,213.1 				"/>
+			</g>
+			<g>
+				<line class="st1" x1="220.2" y1="213.2" x2="220.2" y2="399"/>
+				<line class="st1" x1="342.1" y1="399" x2="342.1" y2="213.1"/>
+				<line class="st1" x1="342.1" y1="213.1" x2="220.2" y2="213.1"/>
+				<line class="st1" x1="220.2" y1="399" x2="342.1" y2="399"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(1 0 0 1 265 306.1)" class="st2 st3">H1-6</text>
+</g>
+<g id="UTI">
+	<g id="A2">
+		<g id="XMLID_2_">
+			<g>
+				<polygon class="st0" points="257.9,136.7 257.9,213.1 220.2,213.1 220.2,286.9 135.5,286.9 135.5,215.6 135.5,136.7 				"/>
+			</g>
+			<g>
+				<line class="st4" x1="135.5" y1="136.7" x2="257.9" y2="136.7"/>
+				<line class="st5" x1="257.9" y1="136.7" x2="257.9" y2="213.1"/>
+				<line class="st5" x1="257.9" y1="213.1" x2="220.2" y2="213.1"/>
+				<line class="st4" x1="220.2" y1="213.1" x2="220.2" y2="286.9"/>
+				<line class="st4" x1="220.2" y1="286.9" x2="135.5" y2="286.9"/>
+				<line class="st4" x1="135.5" y1="286.9" x2="135.5" y2="215.6"/>
+				<line class="st6" x1="135.5" y1="215.6" x2="135.5" y2="136.7"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(1 0 0 1 177.85 210.1)" class="st2 st3">UTI</text>
+</g>
+<g id="Q1">
+	<rect id="A3" x="258.2" y="137.4" class="st7" width="66.1" height="75.1"/>
+	<text transform="matrix(1 0 0 1 281.15 176.15)" class="st2 st3">Q1</text>
+</g>
+<g id="Q2">
+	<rect id="A4" x="324.3" y="137.4" class="st7" width="66.2" height="75.1"/>
+	<text transform="matrix(1 0 0 1 348 176.15)" class="st2 st3">Q2</text>
+</g>
+<g id="UCE">
+	<g id="A7">
+		<g id="XMLID_4_">
+			<g>
+				<polygon class="st0" points="439.4,137.5 438.9,286.1 438.9,286.3 342.1,286.3 342.1,211.8 390.2,211.9 390.2,137.9 				"/>
+			</g>
+			<g>
+				<polyline class="st4" points="342.1,286.3 438.9,286.3 439.4,286.3 				"/>
+				<line class="st4" x1="342.1" y1="286.3" x2="342.1" y2="211.8"/>
+				<line class="st4" x1="342.1" y1="211.8" x2="390.2" y2="211.9"/>
+				<line class="st4" x1="390.2" y1="211.9" x2="390.2" y2="137.9"/>
+				<line class="st4" x1="390.2" y1="137.9" x2="439.4" y2="137.5"/>
+				<line class="st4" x1="439.4" y1="137.5" x2="438.9" y2="286.1"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(1 0 0 1 379 251.25)" class="st2 st3">UCE</text>
+</g>
+<g id="GYM">
+	<g id="A8">
+		<g id="XMLID_1_">
+			<g>
+				<rect x="472.4" y="174.4" class="st0" width="75.9" height="35.7"/>
+			</g>
+			<g>
+				<line class="st4" x1="548.3" y1="174.4" x2="548.3" y2="210.1"/>
+				<line class="st4" x1="548.3" y1="174.4" x2="472.4" y2="174.4"/>
+				<line class="st4" x1="472.4" y1="174.4" x2="472.4" y2="210.1"/>
+				<line class="st4" x1="472.4" y1="210.1" x2="548.3" y2="210.1"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(1 0 0 1 494.1004 197.25)" class="st2 st3">GYM</text>
+</g>
+<g id="GUARDIA">
+	<rect id="A1" x="72.2" y="136.7" class="st7" width="63" height="78.9"/>
+	<text transform="matrix(1 0 0 1 99 176.1503)" class="st2 st3">G</text>
+</g>
+<g id="CONSULTORIOS">
+	<g id="A6">
+		<g id="XMLID_6_">
+			<g>
+				<polygon class="st0" points="342.1,399 342.1,480.2 309.3,480.2 309.3,519.4 254.1,519.4 254.1,480.5 220.2,480.5 220.2,399 
+									"/>
+			</g>
+			<g>
+				<line class="st1" x1="220.2" y1="480.5" x2="254.1" y2="480.5"/>
+				<line class="st1" x1="254.1" y1="480.5" x2="254.1" y2="519.4"/>
+				<line class="st1" x1="254.1" y1="519.4" x2="309.3" y2="519.4"/>
+				<line class="st1" x1="309.3" y1="519.4" x2="309.3" y2="480.2"/>
+				<line class="st1" x1="309.3" y1="480.2" x2="342.1" y2="480.2"/>
+				<line class="st1" x1="220.2" y1="480.5" x2="220.2" y2="399"/>
+				<line class="st1" x1="220.2" y1="399" x2="342.1" y2="399"/>
+				<line class="st1" x1="342.1" y1="399" x2="342.1" y2="480.2"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(1 0 0 1 275 439.75)" class="st2 st3">C</text>
+</g>
+<g id="FISIOTERAPIA">
+	<g id="A10">
+		<g id="XMLID_3_">
+			<g>
+				<polygon class="st0" points="548.6,210.1 548.6,286.1 439.6,286.1 438.9,286.1 438.9,63.9 548.3,63.9 548.3,174.4 472.4,174.4 
+					472.4,210.1 				"/>
+			</g>
+			<g>
+				<line class="st1" x1="439.6" y1="286.1" x2="548.6" y2="286.1"/>
+				<line class="st1" x1="548.6" y1="286.1" x2="548.6" y2="210.1"/>
+				<line class="st1" x1="548.6" y1="210.1" x2="472.4" y2="210.1"/>
+				<line class="st1" x1="472.4" y1="210.1" x2="472.4" y2="174.4"/>
+				<line class="st1" x1="472.4" y1="174.4" x2="548.3" y2="174.4"/>
+				<line class="st1" x1="548.3" y1="174.4" x2="548.3" y2="63.9"/>
+				<line class="st1" x1="548.3" y1="63.9" x2="438.9" y2="63.9"/>
+				<line class="st1" x1="438.9" y1="63.9" x2="438.9" y2="286.1"/>
+			</g>
+		</g>
+	</g>
+	<text transform="matrix(1 0 0 1 481.0504 251.25)" class="st2 st3">FISIO</text>
+</g>
+<g id="FARM">
+	<rect id="A9" x="475" y="98" class="st8" width="51" height="38.1"/>
+	<text transform="matrix(1 0 0 1 481.0504 119.15)" class="st2 st3">FARM</text>
+</g>
+</svg>

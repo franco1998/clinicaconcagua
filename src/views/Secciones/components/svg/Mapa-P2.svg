@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#FFFFFF;stroke:#000000;stroke-width:2.0339;stroke-miterlimit:10;}
+	.st2{font-family:'ArialMT';}
+	.st3{font-size:33.0699px;}
+	.st4{font-size:37.2037px;}
+</style>
+<g id="CHECKEO">
+	<rect x="163.1" y="28.8" class="st0" width="160.9" height="348.9"/>
+	<path d="M323.6,30.1v347.2H163.9V30.1L323.6,30.1 M324.4,28H162.7v350.1h162.1V28H324.4z"/>
+</g>
+<rect id="H1" x="324.4" y="28" class="st1" width="58.8" height="75.2"/>
+<rect id="H2" x="383.7" y="28" class="st1" width="58.8" height="75.2"/>
+<rect id="H3" x="442.5" y="28" class="st1" width="58.8" height="75.2"/>
+<rect id="H4" x="501.4" y="103.2" class="st1" width="58.8" height="75.2"/>
+<rect id="H5" x="501.4" y="178.1" class="st1" width="58.8" height="75.2"/>
+<rect id="H6" x="501.4" y="253.3" class="st1" width="58.8" height="75.2"/>
+<rect id="H7" x="324.4" y="171.9" class="st1" width="58.8" height="75.2"/>
+<rect id="H8" x="383.7" y="171.9" class="st1" width="58.8" height="75.2"/>
+<polygon id="Pasillo" class="st1" points="501.4,103.2 501.4,328.1 442.5,328.1 442.5,171.9 324.4,171.9 324.4,103.2 "/>
+<g id="UCO_1_">
+	<g id="UCO">
+		<rect x="40.2" y="28.8" class="st0" width="121.7" height="186.4"/>
+		<path d="M161.5,30.1v184.4H41.4V30.1H161.5 M162.7,28H39.8v187.7h122.9V28L162.7,28z"/>
+	</g>
+	<text transform="matrix(0.7851 0 0 1 69.2236 133.9531)" class="st2 st3">UCO</text>
+</g>
+<g id="BUFFET">
+	<g id="Comedor">
+		<rect x="163.1" y="379" class="st0" width="160.9" height="192.6"/>
+		<path d="M323.6,380.2v191H163.9v-191H323.6 M324.4,378.1H162.7V572h162.1V378.1H324.4z"/>
+	</g>
+	<text transform="matrix(0.7851 0 0 1 206.5684 482.1318)" class="st2 st4">Buffet</text>
+</g>
+<text transform="matrix(0.7851 0 0 1 234.1025 209.4385)" class="st2 st3">P1</text>
+<rect id="H9" x="264.8" y="302.1" class="st1" width="58.8" height="75.2"/>
+</svg>

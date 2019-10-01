@@ -1,0 +1,148 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepButton from '@material-ui/core/StepButton';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Grid from '@material-ui/core/Grid';
+import Pb from './PB.js';
+import P1 from './P1.js';
+import P2 from './P2.js';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '90%',
+    margin: '0 auto',
+  },
+  button: {
+    height:'600px',
+    width:'4em'
+  },
+  completed: {
+    display: 'inline-block',
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  tam:{
+    width: '100%',
+    margin: '0 auto'
+  },
+  grilla:{
+  },
+  item: {
+    textAlign:'center'
+  },
+}));
+
+function getSteps() {
+  return ['PB', 'P1', 'P2'];
+}
+
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return <Pb/>;
+    case 1:
+      return <P1/>;
+    case 2:
+      return <P2/>;
+  }
+}
+
+export default function HorizontalNonLinearStepper() {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [completed, setCompleted] = React.useState({});
+  const steps = getSteps();
+
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  const handleNext = () => {
+    const newActiveStep =
+      isLastStep() && !allStepsCompleted()
+        ?
+          steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1;
+    setActiveStep(newActiveStep);
+  };
+
+  const isFirstStep = () =>{
+    return activeStep === 0;
+  }
+
+  const handleBack = () => {
+    const newActiveStep =
+    isFirstStep() ? activeStep + 2 : activeStep - 1;
+    setActiveStep(newActiveStep);
+  };
+
+  const handleStep = step => () => {
+    setActiveStep(step);
+  };
+
+  const handleComplete = () => {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    handleNext();
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+    setCompleted({});
+  };
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.tam}>
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepButton onClick={handleStep(index)}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+      </div>
+      <div>
+        <Grid container item xs={12} spacing={3} className={classes.grilla}>
+          <Grid item xs={2} className={classes.item}>
+              <Button onClick={handleBack} className={classes.button}>
+                <ChevronLeftIcon fontSize='large' color='disabled'/>
+              </Button>
+          </Grid>
+          <Grid item xs={8} className={classes.item} alignItems='center' alignContent='center' justify='center'>
+                <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+          </Grid>
+          <Grid item xs={2} className={classes.item} alignItems='flex-end' alignContent='flex-end' justify='center'>
+                <Button
+                  onClick={handleNext}
+                  className={classes.button}>
+                    <ChevronRightIcon fontSize='large' color='disabled'/>
+                </Button>
+          </Grid>
+        </Grid>
+        </div>
+    </div>
+  );
+}

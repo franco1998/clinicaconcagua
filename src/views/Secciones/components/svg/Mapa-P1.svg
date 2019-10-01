@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 150" style="enable-background:new 0 0 300 150;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#FFFFFF;stroke:#000000;stroke-width:0.5;stroke-miterlimit:10;}
+	.st2{font-family:'ArialMT';}
+	.st3{font-size:8px;}
+	.st4{font-size:9px;}
+</style>
+<g id="CHECKEO">
+	<rect x="98.6" y="12" class="st0" width="40.2" height="84.4"/>
+	<path d="M138.7,12.3v84H98.8v-84H138.7 M138.9,11.8H98.5v84.7h40.5V11.8L138.9,11.8z"/>
+</g>
+<rect id="H1" x="138.9" y="11.8" class="st1" width="14.7" height="18.2"/>
+<rect id="H2" x="153.7" y="11.8" class="st1" width="14.7" height="18.2"/>
+<rect id="H3" x="168.4" y="11.8" class="st1" width="14.7" height="18.2"/>
+<rect id="H4" x="183.1" y="30" class="st1" width="14.7" height="18.2"/>
+<rect id="H5" x="183.1" y="48.1" class="st1" width="14.7" height="18.2"/>
+<rect id="H6" x="183.1" y="66.3" class="st1" width="14.7" height="18.2"/>
+<rect id="H7" x="138.9" y="46.6" class="st1" width="14.7" height="18.2"/>
+<rect id="H8" x="153.7" y="46.6" class="st1" width="14.7" height="18.2"/>
+<polygon id="Pasillo" class="st1" points="183.1,30 183.1,84.4 168.4,84.4 168.4,46.6 138.9,46.6 138.9,30 "/>
+<g id="UCO_1_">
+	<g id="UCO">
+		<rect x="67.9" y="12" class="st0" width="30.4" height="45.1"/>
+		<path d="M98.2,12.3v44.6H68.2V12.3H98.2 M98.5,11.8H67.8v45.4h30.7V11.8L98.5,11.8z"/>
+	</g>
+	<text transform="matrix(0.8107 0 0 1 75.1492 37.4311)" class="st2 st3">UCO</text>
+</g>
+<g id="BUFFET">
+	<g id="Comedor">
+		<rect x="98.6" y="96.7" class="st0" width="40.2" height="46.6"/>
+		<path d="M138.7,97v46.2H98.8V97H138.7 M138.9,96.5H98.5v46.9h40.5V96.5L138.9,96.5z"/>
+	</g>
+	<text transform="matrix(0.8107 0 0 1 109.4602 121.6594)" class="st2 st4">Buffet</text>
+</g>
+<text transform="matrix(0.8107 0 0 1 116.3384 55.692)" class="st2 st3">P1</text>
+<rect id="H9" x="124" y="78.1" class="st1" width="14.7" height="18.2"/>
+</svg>
