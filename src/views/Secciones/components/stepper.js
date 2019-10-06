@@ -35,7 +35,9 @@ const useStyles = makeStyles(theme => ({
   grilla:{
   },
   item: {
-    textAlign:'center'
+    textAlign:'center',
+    margin:"0 auto",
+    outline:"1px solid red",
   },
 }));
 
@@ -126,20 +128,9 @@ export default function HorizontalNonLinearStepper() {
       </div>
       <div>
         <Grid container item xs={12} spacing={3} className={classes.grilla}>
-          <Grid item xs={2} className={classes.item}>
-              <Button onClick={handleBack} className={classes.button}>
-                <ChevronLeftIcon fontSize='large' color='disabled'/>
-              </Button>
-          </Grid>
-          <Grid item xs={8} className={classes.item} alignItems='center' alignContent='center' justify='center'>
+
+          <Grid item xs={8} className={classes.item} >
                 <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-          </Grid>
-          <Grid item xs={2} className={classes.item} alignItems='flex-end' alignContent='flex-end' justify='center'>
-                <Button
-                  onClick={handleNext}
-                  className={classes.button}>
-                    <ChevronRightIcon fontSize='large' color='disabled'/>
-                </Button>
           </Grid>
         </Grid>
         </div>

@@ -28,7 +28,7 @@ const Profile = props => {
   const classes = useStyles();
 
   const user = {
-    nombre: 'Demo',
+    nombre: 'Prueba',
   };
 
   return (

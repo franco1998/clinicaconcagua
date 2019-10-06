@@ -40,7 +40,12 @@ const Main = props => {
   const handleSidebarClose = () => {
     setOpenSidebar(false);
   };
-
+  const handleClickClose = () => {
+    if(!isDesktop){
+      setOpenSidebar(false);
+    }
+    
+  }
   const shouldOpenSidebar = isDesktop ? true : openSidebar;
 
   return (
@@ -52,6 +57,7 @@ const Main = props => {
     >
       <Topbar onSidebarOpen={handleSidebarOpen} />
       <Sidebar
+        onClick={handleClickClose}
         onClose={handleSidebarClose}
         open={shouldOpenSidebar}
         variant={isDesktop ? 'persistent' : 'temporary'}

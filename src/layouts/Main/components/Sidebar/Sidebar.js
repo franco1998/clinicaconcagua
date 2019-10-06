@@ -69,7 +69,9 @@ const Sidebar = props => {
       icon: <DashboardIcon />
     }
   ];
-
+  const handleclickeado = (event) =>{
+    event.preventDefault();
+  }
   return (
     <Drawer
       anchor="left"
@@ -87,6 +89,7 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pages}
+          onClick={handleclickeado}
         />
       </div>
     </Drawer>
