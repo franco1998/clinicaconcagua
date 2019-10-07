@@ -19,7 +19,20 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     height:'600px',
-    width:'4em'
+    width:'4em',
+    [theme.breakpoints.down('sm')]: {
+      display:"none",
+    },
+  },
+  left:{
+    [theme.breakpoints.down('sm')]: {
+      display:"none",
+    },
+  },
+  rigth:{
+    [theme.breakpoints.down('sm')]: {
+      display:"none",
+    },
   },
   completed: {
     display: 'inline-block',
@@ -32,12 +45,11 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     margin: '0 auto'
   },
-  grilla:{
-  },
   item: {
     textAlign:'center',
     margin:"0 auto",
     outline:"1px solid red",
+    width:"100%",
   },
 }));
 
@@ -128,10 +140,15 @@ export default function HorizontalNonLinearStepper() {
       </div>
       <div>
         <Grid container item xs={12} spacing={3} className={classes.grilla}>
-
-          <Grid item xs={8} className={classes.item} >
-                <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-          </Grid>
+           <Grid item xs={1} className={classes.left}>
+                  <Button className={classes.button}><ChevronLeftIcon/></Button>
+            </Grid>
+            <Grid item xs={10} className={classes.item} >
+                  <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            </Grid>
+            <Grid item xs={1} className={classes.rigth} >
+                  <Button className={classes.button}><ChevronRightIcon/></Button>
+            </Grid>
         </Grid>
         </div>
     </div>

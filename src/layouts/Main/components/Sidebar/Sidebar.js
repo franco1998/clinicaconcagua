@@ -44,6 +44,11 @@ const Sidebar = props => {
 
   const pages = [
     {
+      title: 'Dashboard',
+      href: '/dashboard',
+      icon: <DashboardIcon />
+    },
+    {
       title: 'Secciones',
       href: '/secciones',
       icon: <LockOpenIcon />
@@ -63,11 +68,7 @@ const Sidebar = props => {
       href: '/account',
       icon: <AccountBoxIcon />
     },
-    {
-      title: 'Dashboard',
-      href: '/dashboard',
-      icon: <DashboardIcon />
-    }
+    
   ];
   const handleclickeado = (event) =>{
     event.preventDefault();

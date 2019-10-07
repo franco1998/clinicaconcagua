@@ -16,13 +16,7 @@ class App extends React.Component{
     this.setState({permiso : true});
   }
   render(){
-      if(this.state.permiso === true){
-         return (
-          <Inicio/>
-        );
-      }else{
-         return(<SignIn clickHandle={this.acceder}/>);
-      }
+     return <Inicio/>;
   }
 }
 
