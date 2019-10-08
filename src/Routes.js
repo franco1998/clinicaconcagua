@@ -8,7 +8,7 @@ import {
   Dashboard as DashboardView,
   PatientList as PatientListView,
   UserList as UserListView,
-  Typography as TypographyView,
+  AddDoctor as AddDoctorView,
   Secciones as SeccionesView,
   Account as AccountView,
   Settings as SettingsView,
@@ -102,6 +102,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/UTI"
+      />
+      <RouteWithLayout
+        component={AddDoctorView}
+        exact
+        layout={MainLayout}
+        path="/Nuevo-Doc"
       />
       <Redirect to="/not-found" />
     </Switch>

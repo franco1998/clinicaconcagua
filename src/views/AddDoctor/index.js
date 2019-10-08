@@ -1,1 +1,1 @@
-import { default as AddDoctor} from './AddDoctor.js';
+export { default } from './NuevoPaciente';
