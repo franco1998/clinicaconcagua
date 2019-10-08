@@ -7,6 +7,9 @@ import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import ItemsNoti from './Components/ItemsNoti.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,6 +30,19 @@ const Topbar = props => {
 
   const [notifications] = useState([]);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
   return (
     <AppBar
       {...rest}
@@ -35,7 +51,7 @@ const Topbar = props => {
       <Toolbar>
         <div className={classes.flexGrow} />
         <Hidden mdDown>
-          <IconButton color="inherit">
+          <IconButton color="inherit" variant="contained" onClick={handleClick}>
             <Badge
               badgeContent={notifications.length}
               color="primary"
@@ -44,6 +60,22 @@ const Topbar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <ItemsNoti/>
+          </Popover>
           <IconButton
             className={classes.signOutButton}
             color="inherit"
