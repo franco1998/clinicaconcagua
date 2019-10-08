@@ -107,7 +107,7 @@ const Routes = () => {
         component={AddDoctorView}
         exact
         layout={MainLayout}
-        path="/Nuevo-Doc"
+        path="/Nuevo-Pac"
       />
       <Redirect to="/not-found" />
     </Switch>

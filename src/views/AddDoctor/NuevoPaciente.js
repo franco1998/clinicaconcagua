@@ -94,7 +94,7 @@ export default function NuevoPaciente() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Nuevo Personal Medico
+            Nuevo paciente
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map(label => (
@@ -107,10 +107,7 @@ export default function NuevoPaciente() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  El Personal Medico ... Fue añadido con exito!
-                </Typography>
-                <Typography variant="subtitle1">
-                  El nombre de usuario es: DNI, y su contraseña es DNI.
+                  El paciente fue añadido con exito!
                 </Typography>
               </React.Fragment>
             ) : (
@@ -128,7 +125,7 @@ export default function NuevoPaciente() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Finalizar' : 'SIguiente'}
+                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
                   </Button>
                 </div>
               </React.Fragment>

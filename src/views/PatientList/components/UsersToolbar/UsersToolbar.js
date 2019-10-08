@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
-
+import { Link as RouterLink } from 'react-router-dom';
 import { SearchInput } from '../../../../Components';
 
 const useStyles = makeStyles(theme => ({
@@ -43,6 +43,8 @@ const UsersToolbar = props => {
         <Button
           color="primary"
           variant="contained"
+          component={RouterLink}
+          to="/Nuevo-Pac"
         >
           Añadir Paciente
         </Button>
