@@ -4,29 +4,24 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-const validar = (props) => {
-  let nombre = document.getElementById('Nombres')
-  let apellidos = document.getElementById('Apellidos')
-  let DNI = document.getElementById('DNI')
-  let direccion = document.getElementById('Direccion')
-  let ciudad = document.getElementById('Ciudad')
-  let provincia = document.getElementById('Provincia')
-  let celular = document.getElementById('Celular')
-  let telefono = document.getElementById('Telefono')
-  let especialidad = document.getElementById('Especialidad')
-  if(props.enviar){
-    if(!nombre.value){
-      props.error = true
-    }else{
-      props.error = false
-    }
-  }else{
-    console.log('se rompio')
-  }
-  
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
-}
-export default function AddressForm(props) {
+export default function AddressForm() {
+
+  const [values, setValues] = React.useState({
+    age: '',
+    name: 'hai',
+  });
+
+  const handleChange = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -36,23 +31,41 @@ export default function AddressForm(props) {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            error={false}
-            id="Nombres"
-            name="Nombres"
-            label="Nombres"
+            id="Nombre"
+            name="Nombre"
+            label="Nombre/s"
             fullWidth
-            autoComplete="Nombres"
+            autoComplete="Nombre"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="Apellidos"
-            name="Apellidos"
-            label="Apellidos"
+            id="Apellido"
+            name="Apellido"
+            label="Apellido/s"
             fullWidth
-            autoComplete="Apellidos"
+            autoComplete="Apellido"
           />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <InputLabel htmlFor="age-required">Tipo Doc</InputLabel>
+        <Select
+          value={values.TDoc}
+          onChange={handleChange}
+          name="TipoDoc"
+          fullWidth
+          inputProps={{
+            id: 'TipoD-required',
+          }}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"DNI"}>DNI</MenuItem>
+          <MenuItem value={"CI"}>CI</MenuItem>
+          <MenuItem value={"LE"}>LE</MenuItem
+        </Select>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -85,7 +98,7 @@ export default function AddressForm(props) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="Provincia" name="Provincia" label="Provincia" fullWidth />
+          <TextField id="state" name="state" label="Provincia" fullWidth />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -108,17 +121,9 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="Telefono"
-            name="Telefono"
-            label="Telefono"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="Especialidad"
-            name="Especialidad"
-            label="Especialidad"
+            id="Tel2"
+            name="Tel2"
+            label="Telefono 2"
             fullWidth
           />
         </Grid>
