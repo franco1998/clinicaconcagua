@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
@@ -11,7 +10,6 @@ import {
   Typography,
   Divider,
   Button,
-  LinearProgress
 } from '@material-ui/core';
 import { getInitials } from '../../../../helpers';
 import { Link as RouterLink } from 'react-router-dom';

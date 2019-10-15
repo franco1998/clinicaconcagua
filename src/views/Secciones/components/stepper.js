@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Grid from '@material-ui/core/Grid';
+import Fade from '@material-ui/core/Fade';
 import Pb from './PB.js';
 import P1 from './P1.js';
 import P2 from './P2.js';
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   item: {
     textAlign:'center',
     margin:"0 auto",
-    outline:"1px solid red",
+    display:'block',
     width:"100%",
   },
 }));
@@ -71,7 +72,7 @@ function getStepContent(step) {
 export default function HorizontalNonLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
+  const [completed] = React.useState({});
   const steps = getSteps();
 
   const totalSteps = () => {
@@ -113,18 +114,6 @@ export default function HorizontalNonLinearStepper() {
     setActiveStep(step);
   };
 
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-  };
-
   return (
     <div className={classes.root}>
       <div className={classes.tam}>
@@ -141,13 +130,16 @@ export default function HorizontalNonLinearStepper() {
       <div>
         <Grid container item xs={12} spacing={3} className={classes.grilla}>
            <Grid item xs={1} className={classes.left}>
-                  <Button className={classes.button}><ChevronLeftIcon/></Button>
+                  <Button className={classes.button} onClick={handleBack}><ChevronLeftIcon/></Button>
             </Grid>
             <Grid item xs={10} className={classes.item} >
+                <Fade>
                   <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                </Fade>
+                  
             </Grid>
             <Grid item xs={1} className={classes.rigth} >
-                  <Button className={classes.button}><ChevronRightIcon/></Button>
+                  <Button className={classes.button} onClick={handleNext}><ChevronRightIcon/></Button>
             </Grid>
         </Grid>
         </div>

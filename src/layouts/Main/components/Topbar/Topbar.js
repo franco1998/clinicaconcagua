@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -8,7 +7,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
 import ItemsNoti from './Components/ItemsNoti.js';
 
 const useStyles = makeStyles(theme => ({

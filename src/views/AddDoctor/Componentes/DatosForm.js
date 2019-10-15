@@ -4,8 +4,29 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+const validar = (props) => {
+  let nombre = document.getElementById('Nombres')
+  let apellidos = document.getElementById('Apellidos')
+  let DNI = document.getElementById('DNI')
+  let direccion = document.getElementById('Direccion')
+  let ciudad = document.getElementById('Ciudad')
+  let provincia = document.getElementById('Provincia')
+  let celular = document.getElementById('Celular')
+  let telefono = document.getElementById('Telefono')
+  let especialidad = document.getElementById('Especialidad')
+  if(props.enviar){
+    if(!nombre.value){
+      props.error = true
+    }else{
+      props.error = false
+    }
+  }else{
+    console.log('se rompio')
+  }
+  
 
-export default function AddressForm() {
+}
+export default function AddressForm(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -15,6 +36,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            error={false}
             id="Nombres"
             name="Nombres"
             label="Nombres"
@@ -63,7 +85,7 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="Provincia" fullWidth />
+          <TextField id="Provincia" name="Provincia" label="Provincia" fullWidth />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -86,9 +108,17 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="Tel2"
-            name="Tel2"
-            label="Telefono 2"
+            id="Telefono"
+            name="Telefono"
+            label="Telefono"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id="Especialidad"
+            name="Especialidad"
+            label="Especialidad"
             fullWidth
           />
         </Grid>

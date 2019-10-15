@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -17,7 +15,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://facebook.com/">
         BeaMotion
       </Link>{' '}
       {new Date().getFullYear()}
@@ -65,10 +63,10 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['Datos Personales', 'Revisión'];
 
-function getStepContent(step) {
+function getStepContent(step,props) {
   switch (step) {
     case 0:
-      return <DatosForm />;
+      return <DatosForm/>;
     case 1:
       return <Review />;
     default:
@@ -76,7 +74,7 @@ function getStepContent(step) {
   }
 }
 
-export default function NuevoPaciente() {
+export default function NuevoPaciente(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -87,7 +85,7 @@ export default function NuevoPaciente() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
+ 
   return (
     <React.Fragment>
       <CssBaseline />

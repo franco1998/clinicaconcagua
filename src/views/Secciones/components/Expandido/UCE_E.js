@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../../../App.css';
+const handleOnmouse = (event) => {
 
+}
 const UCE_E = props=>(
   <svg version="1.1" className="h1-6" viewBox="0 0 300 300" {...props}>
   <g id="A7">
@@ -18,7 +20,6 @@ const UCE_E = props=>(
   		</g>
   	</g>
   </g>
-  <text transform="matrix(1 0 0 1 172.6113 152.8125)" class="st2 st3">UCE</text>
   <path id="C1" className="UCE-E" d="M199.5,54.5h-20c-3.8,0-7-3.1-7-7l0,0c0-3.8,3.1-7,7-7h20c3.8,0,7,3.1,7,7l0,0
   	C206.5,51.4,203.4,54.5,199.5,54.5z"/>
   <path id="C1_1_" className="UCE-E" d="M199.5,85.5h-20c-3.8,0-7-3.1-7-7l0,0c0-3.8,3.1-7,7-7h20c3.8,0,7,3.1,7,7l0,0

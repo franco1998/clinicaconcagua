@@ -1,44 +1,6 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-#C1{
-  animation: 1s parpadear infinite;
-}
-#C4{
-  animation: 1s parpadear infinite;
-}
 .h1-6{
   margin: 1em;
-}
-@keyframes parpadear {
-  0%{
-    fill:#fff;
-    transition-delay: 1s;
-  }
-  100%{
-    fill:green;
-  }
 }
 .CONSULTORIOS,.UCE,.UTI,.Q1,.Q2,.UCE-E,.UCO-E,.UTI-E,.GUARDIA,.HAB,.FARM,.GYM,.FISIO,.UCO,.BUFFET,.CHECKEO,.PASILLO,.H1,.H2,.H3,.H4,.H5,.H6,.H7,.H8,.H9,.H1-6,.P1{
   fill:#FFFFFF;
@@ -52,11 +14,3 @@
   cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

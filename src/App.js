@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import SignIn from './Login.js';
+// import SignIn from './Login.js';
 import Inicio from './Inicio.js';
 import './App.css';
 

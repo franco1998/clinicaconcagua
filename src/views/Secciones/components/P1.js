@@ -15,9 +15,6 @@ import H8 from './Division/H8';
 import H9 from './Division/H9';
 
 class P1 extends React.Component {
-  constructor(props){
-    super(props);
-  }
   render(props){
     return (
         <svg
