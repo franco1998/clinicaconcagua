@@ -12,7 +12,8 @@ import {
   Secciones as SeccionesView,
   Account as AccountView,
   Settings as SettingsView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  Inicio as Inicioview
 } from './views';
 
 import {
@@ -29,7 +30,7 @@ const Routes = () => {
       <Redirect
         exact
         from="/"
-        to="/dashboard"
+        to="/Inicio"
       />
       <RouteWithLayout
         component={DashboardView}
@@ -108,6 +109,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/Nuevo-Pac"
+      />
+      <RouteWithLayout
+        component={Inicioview}
+        exact
+        layout={MainLayout}
+        path="/Inicio"
       />
       <Redirect to="/not-found" />
     </Switch>

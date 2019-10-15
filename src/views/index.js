@@ -6,3 +6,4 @@ export { default as PatientList } from './PatientList';
 export { default as Settings } from './Settings';
 export { default as AddDoctor } from './AddDoctor';
 export { default as UserList } from './UserList';
+export { default as Inicio } from './Inicio';
