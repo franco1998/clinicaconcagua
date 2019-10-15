@@ -21,7 +21,7 @@ const Inicio = props=>{
     variant="contained"
     color="primary"
     className={classes.submit}>
-     Mientras {/* Mientras hola romi */}
+     Empezar
     </Button>
   );
 }
