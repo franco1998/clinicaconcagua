@@ -1,14 +1,12 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Img from '../../img/logo.jpg';
 
 const useStyles = makeStyles(theme => ({
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  imagen: {
+    height: '500px',
+    width:'100%',
   },
-  // boton: {
-  //   margin
-  // }
 }));
 
 const Inicio = props=>{
@@ -16,13 +14,7 @@ const Inicio = props=>{
   const classes = useStyles();
 
   return(
-    <Button className={classes.boton}
-    type="button"
-    variant="contained"
-    color="primary"
-    className={classes.submit}>
-     Empezar
-    </Button>
+    <img src={Img} className={classes.imagen}/>
   );
 }
 export default Inicio;

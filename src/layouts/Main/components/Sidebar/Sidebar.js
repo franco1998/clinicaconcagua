@@ -7,6 +7,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import HomeIcon from '@material-ui/icons/Home';
 
 import { Profile, SidebarNav } from './components';
 
@@ -40,6 +41,11 @@ const Sidebar = props => {
 
   const pages = [
     {
+      title:'Inicio',
+      href:'/inicio',
+      icon:<HomeIcon/>
+    },
+    {
       title: 'Dashboard',
       href: '/dashboard',
       icon: <DashboardIcon />
@@ -64,7 +70,7 @@ const Sidebar = props => {
       href: '/account',
       icon: <AccountBoxIcon />
     },
-    
+
   ];
   const handleclickeado = (event) =>{
     event.preventDefault();

@@ -44,7 +44,7 @@ const Main = props => {
     if(!isDesktop){
       setOpenSidebar(false);
     }
-    
+
   }
   const shouldOpenSidebar = isDesktop ? true : openSidebar;
 
@@ -64,7 +64,6 @@ const Main = props => {
       />
       <main className={classes.content}>
         {children}
-        <Footer />
       </main>
     </div>
   );
