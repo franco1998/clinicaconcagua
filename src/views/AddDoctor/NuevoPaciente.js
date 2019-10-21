@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import DatosForm from './Componentes/DatosForm.js';
+import FamForm from './Componentes/FamiliarForm.js';
 import Review from './Componentes/Review.js';
 
 function Copyright() {
@@ -61,13 +62,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['Datos Personales', 'Revisión'];
+const steps = ['Datos Personales', 'Datos del acompañante', 'Revisión'];
 
 function getStepContent(step,props) {
   switch (step) {
     case 0:
       return <DatosForm/>;
     case 1:
+      return <FamForm/>;
+    case 2:
       return <Review />;
     default:
       throw new Error('Unknown step');
@@ -85,7 +88,7 @@ export default function NuevoPaciente(props) {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
- 
+
   return (
     <React.Fragment>
       <CssBaseline />

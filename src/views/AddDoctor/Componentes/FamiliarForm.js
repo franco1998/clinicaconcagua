@@ -14,42 +14,26 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function AddressForm(props) {
+export default function FamForm() {
 
-  const [values, setValues] = React.useState({
-    Doc: '',
-    OSocial: '',
-  });
+  const tDoc = ['DNI' , 'CI', 'LE', 'LC'];
 
-  const Doc = ['DNI' , 'CI', 'LE', 'LC'];
-  const ObS = ['PAMI', 'OSDE'];
+  const[ Doc , setDoc ] = React.useState();
 
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleChange = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
+    setDoc(event.target.value);
   };
 
   const handleDateChange = date => {
     setSelectedDate(date);
   };
 
-  const [info] = props;
-
-  const agregar = event =>{
-    var nombre = document.getElementById('Nombre').value;
-    var apellido = document.getElementById('Apellido').value;
-    var tipod = document.getElementById('TipoD').value;
-    return (info.push(nombre, apellido, tipod));
-  }
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Datos Personales.
+        Contacto de Emergencia
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -73,17 +57,17 @@ export default function AddressForm(props) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
+        <InputLabel htmlFor="TipoD-required">Tipo Doc</InputLabel>
         <Select
-          value={values.Doc}
+          value={Doc}
           onChange={handleChange}
           fullWidth
           inputProps={{
             name: "Doc",
-            id: 'TipoD',
+            id: 'TipoD-required',
           }}
         >
-        {Doc.map((label, index) => (
+        {tDoc.map((label, index) => (
             <MenuItem value={label}>{label}</MenuItem>
         ))}
         </Select>
@@ -113,58 +97,22 @@ export default function AddressForm(props) {
             />
           </MuiPickersUtilsProvider>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="Direccion"
-            name="Direccion"
-            label="Dirección"
-            fullWidth
-            autoComplete="billing address-line1"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <InputLabel htmlFor="OS-required">Obra Social</InputLabel>
-          <Select
-            required
-            value={values.OSocial}
-            onChange={handleChange}
-            name="OSocial"
-            fullWidth
-            inputProps={{
-              id: 'OSocial-required',
-            }}
-          >
-          {ObS.map((label, index)=>(
-            <MenuItem value={label}>{label}</MenuItem>
-          ))}
-          </Select>
-        </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
             fullWidth
-            id="Nafiliado"
-            name="Nafiliado"
-            label="Numero de afiliado"
-            autoComplete="billing Nafiliado"
+            id="Vinculo"
+            name="Vinculo"
+            label="Vinculo"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="ART"
-            name="ART"
-            label="ART"
+            required
+            id="Telefono"
+            name="Telefono"
+            label="Telefono de contacto"
             fullWidth
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="Nsiniestro "
-            name="NSiniestro"
-            label="Numero de Denuncia o Siniestro"
-            fullWidth
-            onKeyDown={agregar}
           />
         </Grid>
       </Grid>
