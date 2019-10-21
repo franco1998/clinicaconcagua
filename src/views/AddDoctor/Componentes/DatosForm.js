@@ -14,7 +14,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function AddressForm(props) {
+export default function AddressForm() {
 
   const [values, setValues] = React.useState({
     Doc: '',
@@ -36,15 +36,6 @@ export default function AddressForm(props) {
   const handleDateChange = date => {
     setSelectedDate(date);
   };
-
-  const [info] = props;
-
-  const agregar = event =>{
-    var nombre = document.getElementById('Nombre').value;
-    var apellido = document.getElementById('Apellido').value;
-    var tipod = document.getElementById('TipoD').value;
-    return (info.push(nombre, apellido, tipod));
-  }
 
   return (
     <React.Fragment>
@@ -73,14 +64,14 @@ export default function AddressForm(props) {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
+        <InputLabel htmlFor="TipoD-required">Tipo Doc</InputLabel>
         <Select
           value={values.Doc}
           onChange={handleChange}
           fullWidth
           inputProps={{
             name: "Doc",
-            id: 'TipoD',
+            id: 'TipoD-required',
           }}
         >
         {Doc.map((label, index) => (
@@ -126,7 +117,6 @@ export default function AddressForm(props) {
         <Grid item xs={12} sm={6}>
           <InputLabel htmlFor="OS-required">Obra Social</InputLabel>
           <Select
-            required
             value={values.OSocial}
             onChange={handleChange}
             name="OSocial"
@@ -164,7 +154,6 @@ export default function AddressForm(props) {
             name="NSiniestro"
             label="Numero de Denuncia o Siniestro"
             fullWidth
-            onKeyDown={agregar}
           />
         </Grid>
       </Grid>
