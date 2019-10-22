@@ -64,14 +64,16 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['Datos Personales', 'Datos del acompañante', 'Revisión'];
 
+var paciente = [];
+
 function getStepContent(step,props) {
   switch (step) {
     case 0:
-      return <DatosForm/>;
+      return <DatosForm paciente={paciente}/>;
     case 1:
-      return <FamForm/>;
+      return <FamForm paciente={paciente}/>;
     case 2:
-      return <Review />;
+      return <Review paciente={paciente}/>;
     default:
       throw new Error('Unknown step');
   }

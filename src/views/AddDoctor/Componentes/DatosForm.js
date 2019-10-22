@@ -14,17 +14,33 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function AddressForm() {
+const DatosForm = props => {
 
   const [values, setValues] = React.useState({
     Doc: '',
     OSocial: '',
   });
 
+  const { paciente } = props;
+
   const Doc = ['DNI' , 'CI', 'LE', 'LC'];
   const ObS = ['PAMI', 'OSDE'];
 
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+  const agregar = () =>{
+    let nombre = document.getElementById('Nombre').value;
+    let apellido = document.getElementById('Apellido').value;
+    let dni = document.getElementById('TipoD').value + document.getElementById('DNI').value;
+    let nacimiento = selectedDate.toDateString();
+    let direccion = document.getElementById('Direccion').value;
+    let os = document.getElementById('OSocial').value + " " + document.getElementById('Nafiliado').value;
+    let art = document.getElementById('ART').value;
+    let siniestro = document.getElementById('Nsiniestro').value;
+    art += " " +siniestro;
+    paciente.push(nombre, apellido, dni, nacimiento, direccion, os, art);
+    alert(paciente);
+  }
 
   const handleChange = event => {
     setValues(oldValues => ({
@@ -64,14 +80,14 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="TipoD-required">Tipo Doc</InputLabel>
+        <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
         <Select
           value={values.Doc}
           onChange={handleChange}
           fullWidth
           inputProps={{
             name: "Doc",
-            id: 'TipoD-required',
+            id: 'TipoD',
           }}
         >
         {Doc.map((label, index) => (
@@ -115,14 +131,14 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <InputLabel htmlFor="OS-required">Obra Social</InputLabel>
+          <InputLabel htmlFor="OSocial">Obra Social</InputLabel>
           <Select
             value={values.OSocial}
             onChange={handleChange}
             name="OSocial"
             fullWidth
             inputProps={{
-              id: 'OSocial-required',
+              id: 'OSocial',
             }}
           >
           {ObS.map((label, index)=>(
@@ -150,7 +166,7 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="Nsiniestro "
+            id="Nsiniestro"
             name="NSiniestro"
             label="Numero de Denuncia o Siniestro"
             fullWidth
@@ -160,3 +176,4 @@ export default function AddressForm() {
     </React.Fragment>
   );
 }
+export default DatosForm;
