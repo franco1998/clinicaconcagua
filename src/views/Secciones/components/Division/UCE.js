@@ -3,7 +3,7 @@ import '../../../../App.css';
 import { Link } from 'react-router-dom';
 
 const UCE = props=>(
-    <Link to="/UCE">
+    <Link to="/UCE" params={{mensaje:"hola"}}>
       <svg version="1.1"
          viewBox="0 0 600 600" {...props}>
          <g id="UCE">

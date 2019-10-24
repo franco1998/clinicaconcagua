@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import Stepper from './components/stepper.js';
+import Tabs from './components/Tabs.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,7 +18,7 @@ const Secciones = () => {
 
   return (
     <div className={classes.root}>
-      <Stepper/>
+      <Tabs/>
     </div>
   );
 };
