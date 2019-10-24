@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import DatosForm from './Componentes/DatosForm.js';
 import FamForm from './Componentes/FamiliarForm.js';
 import Review from './Componentes/Review.js';
+import Snackbar from'./Componentes/Snackbar.js';
+import { Link as RouterLink } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -62,18 +64,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['Datos Personales', 'Datos del acompañante', 'Revisión'];
+const steps = ['Paciente', 'Contacto de Emergencia', 'Revisión'];
 
 var paciente = [];
+var emergencia = [];
+
+const form = React.createRef();
 
 function getStepContent(step,props) {
   switch (step) {
     case 0:
-      return <DatosForm paciente={paciente}/>;
+      return <DatosForm paciente={paciente} ref={form}/>;
     case 1:
-      return <FamForm paciente={paciente}/>;
+      return <FamForm emergencia={emergencia} ref={form}/>;
     case 2:
-      return <Review paciente={paciente}/>;
+      return <Review paciente={paciente} emergencia={emergencia}/>;
     default:
       throw new Error('Unknown step');
   }
@@ -85,6 +90,9 @@ export default function NuevoPaciente(props) {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    if(activeStep != 2){
+      form.current.agregar();
+    }
   };
 
   const handleBack = () => {
@@ -109,10 +117,8 @@ export default function NuevoPaciente(props) {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  El paciente fue añadido con exito!
-                </Typography>
-              </React.Fragment>
+                <Snackbar variant={'success'} mensaje={"El paciente fue agregado con exito"}/>
+                </React.Fragment>
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep)}
@@ -122,14 +128,25 @@ export default function NuevoPaciente(props) {
                       Atras
                     </Button>
                   )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
-                  </Button>
+                    {activeStep === steps.length - 1 ?
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button}
+                        component={RouterLink}
+                        to={"/pacientes"}
+                      >
+                      Finalizar
+                      </Button>
+                     : <Button
+                       variant="contained"
+                       color="primary"
+                       onClick={handleNext}
+                       className={classes.button}
+                     >
+                     Siguiente
+                     </Button>}
                 </div>
               </React.Fragment>
             )}

@@ -48,7 +48,7 @@ const Topbar = props => {
     >
       <Toolbar>
         <div className={classes.flexGrow} />
-        <Hidden>
+        <Hidden lgUp>
           <IconButton color="inherit" variant="contained" onClick={handleClick}>
             <Badge
               badgeContent={notifications.length}

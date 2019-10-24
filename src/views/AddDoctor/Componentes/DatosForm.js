@@ -9,171 +9,170 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import DateFnsUtils from '@date-io/date-fns';
+import esp from 'date-fns/locale/es';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-const DatosForm = props => {
+class DatosForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      Doc:'-',
+      OSocial:'-',
+      selectedDate: new Date(),
+      Docu: ['DNI' , 'CI', 'LE', 'LC'],
+      ObS: ['PAMI', 'OSDE'],
+      paciente: props.paciente,
+    }
+  }
 
-  const [values, setValues] = React.useState({
-    Doc: '',
-    OSocial: '',
-  });
-
-  const { paciente } = props;
-
-  const Doc = ['DNI' , 'CI', 'LE', 'LC'];
-  const ObS = ['PAMI', 'OSDE'];
-
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
-  const agregar = () =>{
+ agregar (){
     let nombre = document.getElementById('Nombre').value;
     let apellido = document.getElementById('Apellido').value;
-    let dni = document.getElementById('TipoD').value + document.getElementById('DNI').value;
-    let nacimiento = selectedDate.toDateString();
+    let dni = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
+    let nacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
     let direccion = document.getElementById('Direccion').value;
     let os = document.getElementById('OSocial').value + " " + document.getElementById('Nafiliado').value;
     let art = document.getElementById('ART').value;
     let siniestro = document.getElementById('Nsiniestro').value;
     art += " " +siniestro;
-    paciente.push(nombre, apellido, dni, nacimiento, direccion, os, art);
-    alert(paciente);
+    this.state.paciente.push(nombre, apellido, dni, nacimiento, direccion, os, art);
   }
 
-  const handleChange = event => {
-    setValues(oldValues => ({
+  handleChange = event => {
+    this.setState(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+  handleDateChange = date => {
+    this.setState({
+      selectedDate:date,
+    });
   };
 
-  return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Datos Personales.
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="Nombre"
-            name="Nombre"
-            label="Nombre/s"
-            fullWidth
-            autoComplete="Nombre"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="Apellido"
-            name="Apellido"
-            label="Apellido/s"
-            fullWidth
-            autoComplete="Apellido"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
-        <Select
-          value={values.Doc}
-          onChange={handleChange}
-          fullWidth
-          inputProps={{
-            name: "Doc",
-            id: 'TipoD',
-          }}
-        >
-        {Doc.map((label, index) => (
-            <MenuItem value={label}>{label}</MenuItem>
-        ))}
-        </Select>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="DNI"
-            name="DNI"
-            label="DNI"
-            fullWidth
-            autoComplete="DNI"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              margin="normal"
-              id="FechaNac"
-              label="Fecha de Nacimiento"
-              format="dd/MM/yyyy"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
+  render(){
+    return (
+      <React.Fragment>
+        <Typography variant="h4" gutterBottom>
+          Datos del paciente.
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="Nombre"
+              name="Nombre"
+              label="Nombre/s"
+              fullWidth
             />
-          </MuiPickersUtilsProvider>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="Direccion"
-            name="Direccion"
-            label="Dirección"
-            fullWidth
-            autoComplete="billing address-line1"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <InputLabel htmlFor="OSocial">Obra Social</InputLabel>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="Apellido"
+              name="Apellido"
+              label="Apellido/s"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
           <Select
-            value={values.OSocial}
-            onChange={handleChange}
-            name="OSocial"
+            value={this.state.Doc}
+            onChange={this.handleChange}
             fullWidth
             inputProps={{
-              id: 'OSocial',
+              name: "Doc",
+              id: 'TipoD',
             }}
           >
-          {ObS.map((label, index)=>(
-            <MenuItem value={label}>{label}</MenuItem>
+          {this.state.Docu.map((label, index) => (
+              <MenuItem value={label}>{label}</MenuItem>
           ))}
           </Select>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              type={'number'}
+              id="DNI"
+              name="DNI"
+              label="N° de documento"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esp}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="FechaNac"
+                label="Fecha de Nacimiento"
+                format="dd/MM/yyyy"
+                value={this.state.selectedDate}
+                onChange={this.handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="Direccion"
+              name="Direccion"
+              label="Dirección"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="OSocial">Obra Social</InputLabel>
+            <Select
+              value={this.state.OSocial}
+              onChange={this.handleChange}
+              name="OSocial"
+              fullWidth
+              inputProps={{
+                id: 'OSocial',
+              }}
+            >
+            {this.state.ObS.map((label, index)=>(
+              <MenuItem value={label}>{label}</MenuItem>
+            ))}
+            </Select>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              id="Nafiliado"
+              name="Nafiliado"
+              label="Numero de afiliado"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="ART"
+              name="ART"
+              label="ART"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="Nsiniestro"
+              name="NSiniestro"
+              label="Numero de Denuncia o Siniestro"
+              fullWidth
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            fullWidth
-            id="Nafiliado"
-            name="Nafiliado"
-            label="Numero de afiliado"
-            autoComplete="billing Nafiliado"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="ART"
-            name="ART"
-            label="ART"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="Nsiniestro"
-            name="NSiniestro"
-            label="Numero de Denuncia o Siniestro"
-            fullWidth
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 }
 export default DatosForm;

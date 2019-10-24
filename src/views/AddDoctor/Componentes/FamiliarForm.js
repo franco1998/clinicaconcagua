@@ -9,113 +9,126 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import DateFnsUtils from '@date-io/date-fns';
+import esp from 'date-fns/locale/es';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function FamForm() {
+export default class FamForm extends React.Component {
+    constructor(props){
+      super(props);
+      this.state={
+        tDoc: ['DNI' , 'CI', 'LE', 'LC'],
+        Doc:'-',
+        selectedDate:new Date(),
+        emergencia: props.emergencia,
+      }
+    }
 
-  const tDoc = ['DNI' , 'CI', 'LE', 'LC'];
+    agregar (){
+       let nombre = document.getElementById('Nombre').value;
+       let apellido = document.getElementById('Apellido').value;
+       let dni = document.getElementById('TipoD').value +" "+ document.getElementById('DNI').value;
+       let nacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
+       let vinculo = document.getElementById('Vinculo').value;
+       let telefono = document.getElementById('Telefono').value;
+       this.state.emergencia.push(nombre, apellido, dni, nacimiento, vinculo, telefono);
+     }
 
-  const[ Doc , setDoc ] = React.useState();
-
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
-  const handleChange = event => {
-    setDoc(event.target.value);
+    handleChange = event => {
+    this.setState({Doc:event.target.value});
   };
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+   handleDateChange = date => {
+    this.setState({selectedDate:date});
   };
 
-  return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Contacto de Emergencia
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="Nombre"
-            name="Nombre"
-            label="Nombre/s"
-            fullWidth
-            autoComplete="Nombre"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="Apellido"
-            name="Apellido"
-            label="Apellido/s"
-            fullWidth
-            autoComplete="Apellido"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="TipoD-required">Tipo Doc</InputLabel>
-        <Select
-          value={Doc}
-          onChange={handleChange}
-          fullWidth
-          inputProps={{
-            name: "Doc",
-            id: 'TipoD-required',
-          }}
-        >
-        {tDoc.map((label, index) => (
-            <MenuItem value={label}>{label}</MenuItem>
-        ))}
-        </Select>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="DNI"
-            name="DNI"
-            label="DNI"
-            fullWidth
-            autoComplete="DNI"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              margin="normal"
-              id="FechaNac"
-              label="Fecha de Nacimiento"
-              format="dd/MM/yyyy"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
+  render(){
+    return (
+      <React.Fragment>
+        <Typography variant="h4" gutterBottom>
+          Datos del contacto de emergencia.
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="Nombre"
+              name="Nombre"
+              label="Nombre/s"
+              fullWidth
             />
-          </MuiPickersUtilsProvider>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="Apellido"
+              name="Apellido"
+              label="Apellido/s"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
+          <Select
+            value={this.state.Doc}
+            onChange={this.handleChange}
             fullWidth
-            id="Vinculo"
-            name="Vinculo"
-            label="Vinculo"
-          />
+            inputProps={{
+              name: "Doc",
+              id: 'TipoD',
+            }}
+          >
+          {this.state.tDoc.map((label, index) => (
+              <MenuItem value={label}>{label}</MenuItem>
+          ))}
+          </Select>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="DNI"
+              name="DNI"
+              label="N° de documento"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esp}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="FechaNac"
+                label="Fecha de Nacimiento"
+                format="dd/MM/yyyy"
+                value={this.state.selectedDate}
+                onChange={this.handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              fullWidth
+              id="Vinculo"
+              name="Vinculo"
+              label="Vinculo"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="Telefono"
+              name="Telefono"
+              label="Telefono de contacto"
+              fullWidth
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="Telefono"
-            name="Telefono"
-            label="Telefono de contacto"
-            fullWidth
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 }
