@@ -17,11 +17,7 @@ import {
 } from './views';
 
 import {
-  H1_6 as H1_6View,
-  P1_h as P1_HView,
-  UCE_E as UCE_EView,
-  UCO_E as UCO_EView,
-  UTI_E as UTI_EViwe
+  Expande as ExpandeView
 } from './views/Secciones/components/Expandido';
 
 const Routes = () => {
@@ -51,12 +47,6 @@ const Routes = () => {
         path="/pacientes"
       />
       <RouteWithLayout
-        component={P1_HView}
-        exact
-        layout={MainLayout}
-        path="/P1"
-      />
-      <RouteWithLayout
         component={SeccionesView}
         exact
         layout={MainLayout}
@@ -81,28 +71,10 @@ const Routes = () => {
         path="/not-found"
       />
       <RouteWithLayout
-        component={H1_6View}
+        component={ExpandeView}
         exact
         layout={MainLayout}
-        path="/H1_6"
-      />
-      <RouteWithLayout
-        component={UCE_EView}
-        exact
-        layout={MainLayout}
-        path="/UCE"
-      />
-      <RouteWithLayout
-        component={UCO_EView}
-        exact
-        layout={MainLayout}
-        path="/UCO"
-      />
-      <RouteWithLayout
-        component={UTI_EViwe}
-        exact
-        layout={MainLayout}
-        path="/UTI"
+        path="/SeccionesE"
       />
       <RouteWithLayout
         component={AddDoctorView}

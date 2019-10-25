@@ -87,6 +87,7 @@ function getStepContent(step,props) {
 export default function NuevoPaciente(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const {mensaje} = props.location.state;
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -104,7 +105,7 @@ export default function NuevoPaciente(props) {
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
+          <Typography component="h1" variant="h4" align="center" onClick={alert(mensaje)}>
             Nuevo paciente
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>

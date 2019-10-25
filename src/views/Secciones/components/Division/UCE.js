@@ -3,9 +3,13 @@ import '../../../../App.css';
 import { Link } from 'react-router-dom';
 
 const UCE = props=>(
-    <Link to="/UCE" params={{mensaje:"hola"}}>
+    <Link to={{
+      pathname:'/SeccionesE',
+      state:{
+        indice: 1,
+      }}}>
       <svg version="1.1"
-         viewBox="0 0 600 600" {...props}>
+         viewBox="0 0 600 600" {...props} style={{border:'1px solid green'}}>
          <g id="UCE">
          	<g id="A7">
          		<g id="XMLID_4_">

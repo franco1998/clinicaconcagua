@@ -2,7 +2,8 @@ import React from 'react';
 import '../../../../App.css';
 
 const H1_6 = props=>(
-  <svg version="1.1" viewBox="0 0 600 600" {...props}>
+  <svg version="1.1"
+      viewBox="0 0 700 700" {...props} className="hab">
   <g id="H1-6_1_">
     <g id="H1-6">
       <g id="XMLID_5_">

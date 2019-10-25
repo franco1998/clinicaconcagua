@@ -3,7 +3,11 @@ import '../../../../App.css';
 import { Link } from 'react-router-dom';
 
 const UTI = props=>(
-    <Link to="/UTI">
+    <Link to={{
+      pathname:'/SeccionesE',
+      state:{
+        indice: 2,
+      }}}>
       <svg version="1.1"
          viewBox="0 0 600 600" {...props}>
          <g id="UTI">

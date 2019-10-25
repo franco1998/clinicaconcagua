@@ -1,9 +1,13 @@
 import React from 'react';
 import '../../../../App.css';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-const Habitaciones = props=>(
-      <Link to="/H1_6">
+const Habitaciones = props =>(
+      <Link to={{
+        pathname:'/SeccionesE',
+        state:{
+          indice: 0,
+        }}}>
         <svg version="1.1"
            viewBox="0 0 600 600" {...props}>
            <g id="H1-6_1_">

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link as RouterLink } from 'react-router-dom';
-import { SearchInput } from '../../../../Components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UsersToolbar = props => {
+const Toolbar = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -41,31 +41,18 @@ const UsersToolbar = props => {
       <div className={classes.row}>
         <span className={classes.spacer} />
         <Button
-          color="primary"
-          variant="contained"
           component={RouterLink}
-          to={{
-            pathname:'/Nuevo-Pac',
-            state:{
-              mensaje: "hola",
-            }
-          }}
+          to={'/secciones'}
         >
-          Añadir Paciente
+          <ArrowBackIcon/>
         </Button>
-      </div>
-      <div className={classes.row}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Search user"
-        />
       </div>
     </div>
   );
 };
 
-UsersToolbar.propTypes = {
+Toolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default UsersToolbar;
+export default Toolbar;
