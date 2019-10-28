@@ -2,14 +2,14 @@
 .h1-6{
   margin: 1em;
 }
-.CONSULTORIOS,.UCE,.UTI,.Q1,.Q2,.UCE-E,.UCO-E,.UTI-E,.GUARDIA,.HAB,.FARM,.GYM,.FISIO,.UCO,.BUFFET,.CHECKEO,.PASILLO,.H1,.H2,.H3,.H4,.H5,.H6,.H7,.H8,.H9,.H1-6,.P1{
+.CONSULTORIOS,.UCE,.UTI,.Q1,.Q2,.UCE-E,.UCO-E,.UTI-E,.GUARDIA,.HAB,.FARM,.GYM,.FISIO,.UCO,.BUFFET,.CHECKEO,.PASILLO,.H1,.H2,.H3,.H4,.H5,.H6,.H7,.H8,.H9,.H1-6,.P1, .CH1-6{
   fill:#FFFFFF;
   font-size: 16px;
   stroke:grey;
   box-shadow: 0 0 10px 10em #ddd;
   stroke-miterlimit:10;
 }
-.UCE:hover,.UTI:hover,.Q1:hover,.Q2:hover,.GUARDIA:hover,.HAB:hover,.FARM:hover,.GYM:hover,.FISIO:hover,.CONSULTORIOS:hover,.UCO:hover,.BUFFET:hover,.CHECKEO:hover,.H1:hover,.H2:hover,.H3:hover,.H4:hover,.H5:hover,.H6:hover,.H7:hover,.H8:hover,.H9:hover{
+.UCE:hover,.UTI:hover,.Q1:hover,.Q2:hover,.GUARDIA:hover,.HAB:hover,.FARM:hover,.GYM:hover,.FISIO:hover,.CONSULTORIOS:hover,.UCO:hover,.BUFFET:hover,.CHECKEO:hover,.H1:hover,.H2:hover,.H3:hover,.H4:hover,.H5:hover,.H6:hover,.H7:hover,.H8:hover,.H9:hover,.CH1-6:hover{
   fill: #bfbfbf;
   cursor: pointer;
 }
