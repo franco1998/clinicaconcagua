@@ -13,7 +13,8 @@ import {
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
-  Inicio as Inicioview
+  Inicio as Inicioview,
+  Login as LoginView,
 } from './views';
 
 import {
@@ -26,7 +27,13 @@ const Routes = () => {
       <Redirect
         exact
         from="/"
-        to="/Inicio"
+        to="/Login"
+      />
+      <RouteWithLayout
+        component={LoginView}
+        exact
+        layout={MinimalLayout}
+        path="/Login"
       />
       <RouteWithLayout
         component={DashboardView}

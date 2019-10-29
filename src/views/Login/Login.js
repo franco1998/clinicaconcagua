@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link as RouterLink } from 'react-router-dom';
+
 
 function Copyright() {
   return (
@@ -53,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SignIn = props => {
+const Login = props => {
 
   const classes = useStyles();
 
@@ -97,7 +99,8 @@ const SignIn = props => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={props.clickHandle}>
+                component={RouterLink}
+                to={"/Inicio"}>
                 Ingresar
               </Button>
               <Grid container>
@@ -117,4 +120,4 @@ const SignIn = props => {
     );
   };
 
-  export default SignIn;
+  export default Login;
