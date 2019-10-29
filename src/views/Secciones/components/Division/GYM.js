@@ -18,7 +18,7 @@ const GYM = props=>(
        			</g>
        		</g>
        	</g>
-       	<text transform="matrix(1 0 0 1 494.1004 197.25)" className="GYM">GYM</text>
+       	<text transform="matrix(1 0 0 1 494.1004 197.25)" className="GYM">GIMNASIO</text>
        </g>
     </svg>
   )

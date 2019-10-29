@@ -23,7 +23,7 @@ const Fisioterapia = props=>(
        			</g>
        		</g>
        	</g>
-       	<text transform="matrix(1 0 0 1 481.0504 251.25)" className="FISIO">FISIO</text>
+       	<text transform="matrix(1 0 0 1 481.0504 251.25)" className="FISIO">FISIOTERAPIA</text>
        </g>
     </svg>
   )
