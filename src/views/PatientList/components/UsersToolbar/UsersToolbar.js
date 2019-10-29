@@ -44,12 +44,7 @@ const UsersToolbar = props => {
           color="primary"
           variant="contained"
           component={RouterLink}
-          to={{
-            pathname:'/Nuevo-Pac',
-            state:{
-              mensaje: "hola",
-            }
-          }}
+          to={"/Nuevo-Pac"}
         >
           Añadir Paciente
         </Button>

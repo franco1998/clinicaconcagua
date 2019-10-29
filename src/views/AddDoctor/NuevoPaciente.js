@@ -6,26 +6,12 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import DatosForm from './Componentes/DatosForm.js';
 import FamForm from './Componentes/FamiliarForm.js';
 import Review from './Componentes/Review.js';
 import Snackbar from'./Componentes/Snackbar.js';
 import { Link as RouterLink } from 'react-router-dom';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://facebook.com/">
-        BeaMotion
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -87,11 +73,10 @@ function getStepContent(step,props) {
 export default function NuevoPaciente(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const {mensaje} = props.location.state;
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    if(activeStep != 2){
+    if(activeStep !== 2){
       form.current.agregar();
     }
   };
@@ -105,7 +90,7 @@ export default function NuevoPaciente(props) {
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center" onClick={alert(mensaje)}>
+          <Typography component="h1" variant="h4" align="center">
             Nuevo paciente
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
@@ -153,7 +138,6 @@ export default function NuevoPaciente(props) {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </main>
     </React.Fragment>
   );

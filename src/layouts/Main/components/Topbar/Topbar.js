@@ -8,6 +8,7 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Popover from '@material-ui/core/Popover';
 import ItemsNoti from './Components/ItemsNoti.js';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -79,6 +80,8 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            component={RouterLink}
+            to={"/Login"}
           >
             <InputIcon />
           </IconButton>

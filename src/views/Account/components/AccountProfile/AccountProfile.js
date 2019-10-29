@@ -85,6 +85,17 @@ const AccountProfile = props => {
           Cambiar contraseña
         </Button>
       </CardActions>
+      <CardActions>
+        <Button
+          className={classes.uploadButton}
+          color="primary"
+          variant="text"
+          component={RouterLink}
+          to="/Login">
+        >
+          Cerrar sesion
+        </Button>
+      </CardActions>
     </Card>
   );
 };

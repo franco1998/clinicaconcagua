@@ -56,7 +56,7 @@ const Sidebar = props => {
       icon: <LockOpenIcon />
     },
     {
-      title: 'Doctores',
+      title: 'Personal de la clinica',
       href: '/doctores',
       icon: <PeopleIcon />
     },

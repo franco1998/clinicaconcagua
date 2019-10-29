@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Inicio from './Inicio.js';
 import './App.css';
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
@@ -90,10 +89,6 @@ export default function NewSnackbar(props) {
   let variant = props.variant;
   let mensaje = props.mensaje;
 
-  const handleClick = () => {
-    setOpen(true);
-  };
-
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -112,7 +107,6 @@ export default function NewSnackbar(props) {
             message= {props.mensaje}
           />
         );
-        break;
       case 'error':
         return(
           <MySnackbarContentWrapper
@@ -121,7 +115,6 @@ export default function NewSnackbar(props) {
             message="This is an error message!"
           />
         );
-        break;
       case 'warning':
         return(
           <MySnackbarContentWrapper
@@ -130,7 +123,6 @@ export default function NewSnackbar(props) {
             message="This is a warning message!"
           />
         );
-        break;
       case 'info':
         return(
           <MySnackbarContentWrapper
@@ -139,7 +131,6 @@ export default function NewSnackbar(props) {
             message="This is an information message!"
           />
         );
-        break;
       default:
         return( alert("HOli"));
     }
