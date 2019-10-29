@@ -11,6 +11,7 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -47,7 +48,7 @@ const Password = props => {
         <CardContent>
           <TextField
             fullWidth
-            label="Contraseña"
+            label="Nueva contraseña"
             name="password"
             onChange={handleChange}
             type="password"
@@ -70,8 +71,18 @@ const Password = props => {
           <Button
             color="primary"
             variant="outlined"
+            component={RouterLink}
+            to={"/account"}
           >
             Guardar
+          </Button>
+          <Button
+            color="primary"
+            variant="outlined"
+            component={RouterLink}
+            to={"/account"}
+          >
+            Cancelar
           </Button>
         </CardActions>
       </form>

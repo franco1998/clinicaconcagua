@@ -82,7 +82,7 @@ const AccountProfile = props => {
           component={RouterLink}
           to="/settings">
         >
-          Configurar
+          Cambiar contraseña
         </Button>
       </CardActions>
     </Card>
