@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../../App.css';
 
 const UTI_E = props=>(
-  <svg version="1.1" viewBox="0 0 600 600" {...props}>
+  <svg version="1.1" viewBox="-150 20 700 700" {...props}>
   <g id="UTI">
   	<g id="A2">
   		<g id="XMLID_2_">

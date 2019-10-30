@@ -3,7 +3,11 @@ import '../../../../App.css';
 import { Link } from 'react-router-dom';
 
 const UCO = props=>(
-    <Link to="/UCO">
+  <Link to={{
+    pathname:'/SeccionesE',
+    state:{
+      indice: 3,
+    }}}>
       <svg version="1.1"
          viewBox="0 0 600 600" {...props}>
          <g id="UCO_1_">

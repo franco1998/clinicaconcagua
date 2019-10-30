@@ -44,7 +44,7 @@ const UsersToolbar = props => {
           color="primary"
           variant="contained"
         >
-          añadir Doctor
+          Añadir nuevo
         </Button>
       </div>
       <div className={classes.row}>

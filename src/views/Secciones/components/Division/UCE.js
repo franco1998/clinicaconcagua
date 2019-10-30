@@ -6,7 +6,7 @@ const UCE = props=>(
     <Link to={{
       pathname:'/SeccionesE',
       state:{
-        indice: 1,
+        indice: 0,
       }}}>
       <svg version="1.1"
          viewBox="0 0 600 600" {...props} style={{border:'1px solid green'}}>

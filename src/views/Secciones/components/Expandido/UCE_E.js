@@ -4,7 +4,7 @@ const handleOnmouse = (event) => {
 
 }
 const UCE_E = props=>(
-  <svg version="1.1" className="h1-6" viewBox="0 0 300 300" {...props}>
+  <svg version="1.1" className="h1-6" viewBox="-150 20 700 700" {...props}>
   <g id="A7">
   	<g id="XMLID_4_">
   		<g>

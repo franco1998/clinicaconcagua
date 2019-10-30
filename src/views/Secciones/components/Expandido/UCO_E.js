@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../../App.css';
 
 const UCO_E = props=>(
-  <svg version="1.1" viewBox="0 0 600 600" {...props}>
+  <svg version="1.1" viewBox="-150 20 700 700" {...props}>
   <g id="UCO">
   	<rect x="62.7" y="46.7" className="UCO-E" width="174.6" height="206.6"/>
   	<path className="UCO-E" d="M236.6,48.1v204.5H64.1V48.1H236.6 M238,46H62v208h176V46L238,46z"/>
