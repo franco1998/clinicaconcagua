@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../../App.css';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -11,20 +11,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
-import TabV from './Componentes/TabV.js';
+import NoPaciente from './Componentes/NoPaciente.js';
 
 const useStyles = makeStyles( theme =>({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
   row: {
-    height: '42px',
+    height: '50px',
     display: 'flex',
     alignItems: 'center',
-    marginTop: theme.spacing(1)
+    width:'auto',
+    backgroundColor: theme.palette.primary.main,
   },
   spacer: {
     flexGrow: 0.5,
@@ -118,7 +113,7 @@ export default function H1_6 (props){
             {state.cama}
           </Typography>
         </div>
-        <TabV/>
+        <NoPaciente/>
       </div>
     </SwipeableDrawer>
     </div>

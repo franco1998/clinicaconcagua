@@ -6,7 +6,7 @@ const UTI = props=>(
     <Link to={{
       pathname:'/SeccionesE',
       state:{
-        indice: 2,
+        indice: 0,
       }}}>
       <svg version="1.1"
          viewBox="0 0 600 600" {...props}>
