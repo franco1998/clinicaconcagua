@@ -13,10 +13,10 @@ export default {
     light: '#338573'
   },
   secondary: {
-    contrastText: white,
+    contrastText: black,
     dark: '#585b5b',
     main: '#7E8283',
-    light: '#979b9b'
+    light: '#ebecec'
   },
   success: {
     contrastText: white,

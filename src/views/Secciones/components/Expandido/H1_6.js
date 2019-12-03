@@ -12,6 +12,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Typography from '@material-ui/core/Typography';
 import NoPaciente from './Componentes/NoPaciente.js';
+import InfoPaciente from './Componentes/InfoPaciente.js';
 
 const useStyles = makeStyles( theme =>({
   row: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles( theme =>({
   spacer: {
     flexGrow: 0.5,
   },
+  modal:{
+    height: 224,
+  }
 }));
 
 export default function H1_6 (props){
@@ -105,6 +109,7 @@ export default function H1_6 (props){
         open={state.bottom}
         onClose={toggleDrawer('bottom', false, '')}
         onOpen={toggleDrawer('bottom', true, '')}
+        className={classes.modal}
       >
       <div>
         <div className={classes.row}>
@@ -113,7 +118,7 @@ export default function H1_6 (props){
             {state.cama}
           </Typography>
         </div>
-        <NoPaciente/>
+        <InfoPaciente/>
       </div>
     </SwipeableDrawer>
     </div>

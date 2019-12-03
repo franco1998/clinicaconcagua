@@ -23,7 +23,7 @@ const Consultorios = props=>(
        			</g>
        		</g>
        	</g>
-       	<text transform="matrix(1 0 0 1 275 439.75)" className="CONSULTORIOS">Consultorio</text>
+       	<text transform="matrix(1 0 0 1 275 439.75)" className="CONSULTORIOS">C</text>
        </g>
     </svg>
   )

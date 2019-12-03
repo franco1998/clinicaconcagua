@@ -24,7 +24,7 @@ const Habitaciones = props =>(
            			</g>
            		</g>
            	</g>
-           	<text transform="matrix(1 0 0 1 265 306.1)" className="HAB">HAB 1 - 6</text>
+           	<text transform="matrix(1 0 0 1 265 306.1)" className="HAB">Hab 1 - 6</text>
            </g>
         </svg>
       </Link>

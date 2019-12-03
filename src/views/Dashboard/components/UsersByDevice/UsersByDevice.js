@@ -47,18 +47,18 @@ const UsersByDevice = props => {
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: [70, 15, 15],
         backgroundColor: [
-          theme.palette.primary.main,
-          theme.palette.error.main,
-          theme.palette.warning.main
+          theme.palette.success.main,
+          theme.palette.warning.main,
+          theme.palette.error.main
         ],
         borderWidth: 8,
         borderColor: theme.palette.white,
         hoverBorderColor: theme.palette.white
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['Estables', 'Atencion', 'Atencion Inmediata']
   };
 
   const options = {
@@ -85,22 +85,19 @@ const UsersByDevice = props => {
 
   const devices = [
     {
-      title: 'Desktop',
-      value: '63',
-      icon: <LaptopMacIcon />,
+      title: data.labels[0],
+      value: '70',
       color: theme.palette.primary.main
     },
     {
-      title: 'Tablet',
+      title: data.labels[1],
       value: '15',
-      icon: <TabletMacIcon />,
-      color: theme.palette.error.main
+      color: theme.palette.warning.main
     },
     {
-      title: 'Mobile',
-      value: '23',
-      icon: <PhoneIphoneIcon />,
-      color: theme.palette.warning.main
+      title: data.labels[2],
+      value: '15',
+      color: theme.palette.error.main
     }
   ];
 
@@ -115,7 +112,7 @@ const UsersByDevice = props => {
             <RefreshIcon />
           </IconButton>
         }
-        title="Users By Device"
+        title="Estado actual de pacientes"
       />
       <Divider />
       <CardContent>

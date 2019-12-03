@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function VerticalTabs() {
+export default function Interconsultas() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -66,14 +66,46 @@ export default function VerticalTabs() {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="Estudios" {...a11yProps(0)} />
-        <Tab label="Interconsultas" {...a11yProps(1)} />
+        <Tab label="Neurología" {...a11yProps(0)} />
+        <Tab label="Cirugía" {...a11yProps(1)} />
+        <Tab label="Cardiología" {...a11yProps(2)} />
+        <Tab label="Traumatología" {...a11yProps(3)} />
+        <Tab label="Oncología" {...a11yProps(4)} />
+        <Tab label="Ginecología" {...a11yProps(5)} />
+        <Tab label="Kinesiología" {...a11yProps(6)} />
+        <Tab label="Urología" {...a11yProps(7)} />
+        <Tab label="Dermatología" {...a11yProps(8)} />
+        <Tab label="Nefrología" {...a11yProps(9)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        Item One
+        Neurología
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        Cirugía
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Cardiología
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Traumatología
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        Oncología
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        Ginecología
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        Kinesiología
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        Urología
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        Dermatología
+      </TabPanel>
+      <TabPanel value={value} index={9}>
+        Nefrología
       </TabPanel>
     </div>
   );
