@@ -18,31 +18,61 @@ const useStyles = makeStyles(theme => ({
 
 export default function Review(props) {
   const classes = useStyles();
-  let paciente = props.paciente;
-  let emergencia = props.emergencia;
+  const paciente = props.paciente;
   return (
     <React.Fragment>
       <Typography variant="h4" gutterBottom>
         Paciente:
       </Typography>
         <Grid container>
-        {paciente.map((label) => (
-          <Grid item xs={12} sm={6} key={label}  className={classes.title}>
-            {label}
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.Nombre}
           </Grid>
-        ))}
-        </Grid>
-      <Typography variant="h4" gutterBottom>
-        Contacto de Emergencia:
-      </Typography>
-      <Grid container >
-        {emergencia.map((value) => (
-          <Grid item xs={12} sm={6} key={value} className={classes.title}>
-            {value}
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.Documento}
           </Grid>
-        ))}
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.FdeNacimiento}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.Direccion}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.Osocial}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.op}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.Nafiliado}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.ART}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {paciente.Nsiniestro}
+          </Grid>
         </Grid>
-
+        <Typography variant="h4" gutterBottom>
+          Contacto de Emergencia:
+        </Typography>
+        <Grid container>
+        <Grid item xs={12} sm={6} className={classes.title}>
+          {paciente.NombreE}
+        </Grid>
+        <Grid item xs={12} sm={6} className={classes.title}>
+          {paciente.DocumentoE}
+        </Grid>
+        <Grid item xs={12} sm={6} className={classes.title}>
+          {paciente.FdeNacimientoE}
+        </Grid>
+        <Grid item xs={12} sm={6} className={classes.title}>
+          {paciente.Vinculo}
+        </Grid>
+        <Grid item xs={12} sm={6} className={classes.title}>
+          {paciente.TelefonoE}
+        </Grid>
+        </Grid>
     </React.Fragment>
   );
 }

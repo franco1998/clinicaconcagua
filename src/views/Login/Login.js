@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -44,6 +44,21 @@ const Login = props => {
 
   const classes = useStyles();
 
+  const [state, setState] = useState({
+    user: '',
+    password: ''
+  });
+
+  const handleChange=(e)=>{
+    setState({
+      ...state,
+      [e.target.id]: e.target.value})
+  }
+
+  const handleSubmit=(e)=>{
+    console.log(state);
+  }
+
     return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -64,7 +79,7 @@ const Login = props => {
               id="user"
               label="Usuario"
               name="user"
-              autoComplete="user"
+              onChange={handleChange}
               autoFocus
             />
             <TextField
@@ -76,15 +91,14 @@ const Login = props => {
               label="Contraseña"
               type="password"
               id="password"
-              autoComplete="current-password"/>
+              onChange={handleChange}/>
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                component={RouterLink}
-                to={"/Inicio"}>
+                onClick={handleSubmit}>
                 Ingresar
               </Button>
               <Grid container>

@@ -12,6 +12,8 @@ import FamForm from './Componentes/FamiliarForm.js';
 import Review from './Componentes/Review.js';
 import Snackbar from'./Componentes/Snackbar.js';
 import { Link as RouterLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPatients } from '../../store/actions/PatientsActions';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -52,8 +54,22 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['Paciente', 'Contacto de Emergencia', 'Revisión'];
 
-var paciente = [];
-var emergencia = [];
+const paciente = {
+  Nombre: '',
+  Documento: '',
+  FdeNacimiento: '',
+  Direccion:'',
+  Osocial:'',
+  op:'',
+  Nafiliado:'',
+  ART:'',
+  Nsiniestro:'',
+  NombreE:'',
+  DocumentoE:'',
+  FdeNacimientoE:'',
+  Vinculo:'',
+  TelefonoE:'',
+}
 
 const form = React.createRef();
 
@@ -62,15 +78,15 @@ function getStepContent(step,props) {
     case 0:
       return <DatosForm paciente={paciente} ref={form}/>;
     case 1:
-      return <FamForm emergencia={emergencia} ref={form}/>;
+      return <FamForm paciente={paciente} ref={form}/>;
     case 2:
-      return <Review paciente={paciente} emergencia={emergencia}/>;
+      return <Review paciente={paciente}/>;
     default:
       throw new Error('Unknown step');
   }
 }
 
-export default function NuevoPaciente(props) {
+function NuevoPaciente(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -84,6 +100,10 @@ export default function NuevoPaciente(props) {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const handleSubmit = () =>{
+      props.createPatients(paciente)
+  }
 
   return (
     <React.Fragment>
@@ -118,7 +138,7 @@ export default function NuevoPaciente(props) {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleNext}
+                        onClick={handleSubmit}
                         className={classes.button}
                         component={RouterLink}
                         to={"/pacientes"}
@@ -142,3 +162,11 @@ export default function NuevoPaciente(props) {
     </React.Fragment>
   );
 }
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    createPatients: (paciente) => dispatch(createPatients(paciente))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NuevoPaciente);

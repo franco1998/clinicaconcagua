@@ -15,8 +15,7 @@ import {
   Typography,
   TablePagination
 } from '@material-ui/core';
-
-import { getInitials } from '../../../../helpers';
+import CheckIcon from '@material-ui/icons/Check';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -55,6 +54,7 @@ const UsersTable = props => {
     setRowsPerPage(event.target.value);
   };
 
+
   return (
     <Card
       {...rest}
@@ -67,39 +67,41 @@ const UsersTable = props => {
               <TableHead>
                 <TableRow>
                   <TableCell>DNI</TableCell>
-                  <TableCell>Nombre</TableCell>
-                  <TableCell>Apellido</TableCell>
+                  <TableCell>Apellido y Nombre</TableCell>
                   <TableCell>Direccion</TableCell>
-                  <TableCell>Telefono</TableCell>
                   <TableCell>Obra Social </TableCell>
                   <TableCell> OP</TableCell>
-                  <TableCell>N° Historia Clinica </TableCell>
+                  <TableCell> Contacto de Emergencia </TableCell>
+                  <TableCell> Telefono del contacto </TableCell>
+                  <TableCell> Vinculo </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
+                {users && users.map(user => (
                   <TableRow
                     className={classes.tableRow}
                     hover
                     key={user.id}
                     selected={selectedUsers.indexOf(user.id) !== -1}
                   >
-                  <TableCell>{user.dni}</TableCell>
+                  <TableCell>{user.Documento}</TableCell>
                     <TableCell>
-                        <Typography variant="body1">{user.nombre}</Typography>
+                        <Typography variant="body1">{user.Nombre}</Typography>
                     </TableCell>
                     <TableCell>
-                        <Typography variant="body1">{user.apelido}</Typography>
+                        <Typography variant="body1">{user.Direccion}</Typography>
                     </TableCell>
                     <TableCell>
-                      {user.direccion}
+                      { user.Osocial}
                     </TableCell>
-                    <TableCell>{user.telefono}</TableCell>
+                    <TableCell>{
+                      user.op ? <CheckIcon/> : "X"
+                    }</TableCell>
                     <TableCell>
-                      {user.obraS}
+                      {user.NombreE}
                     </TableCell>
-                    <TableCell> {user.op}</TableCell>
-                    <TableCell> {user.hc}</TableCell>
+                    <TableCell> {user.TelefonoE}</TableCell>
+                    <TableCell> {user.Vinculo}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -110,12 +112,11 @@ const UsersTable = props => {
       <CardActions className={classes.actions}>
         <TablePagination
           component="div"
-          count={users.length}
+          count={4}
           onChangePage={handlePageChange}
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}
           rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
         />
       </CardActions>
     </Card>

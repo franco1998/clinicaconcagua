@@ -27,16 +27,15 @@ class DatosForm extends React.Component {
   }
 
  agregar (){
-    let nombre = document.getElementById('Nombre').value;
-    let apellido = document.getElementById('Apellido').value;
-    let dni = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
-    let nacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
-    let direccion = document.getElementById('Direccion').value;
-    let os = document.getElementById('OSocial').value + " " + document.getElementById('Nafiliado').value;
-    let art = document.getElementById('ART').value;
-    let siniestro = document.getElementById('Nsiniestro').value;
-    art += " " +siniestro;
-    this.state.paciente.push(nombre, apellido, dni, nacimiento, direccion, os, art);
+    this.state.paciente.Nombre = document.getElementById('Nombre').value + " " + document.getElementById('Apellido').value;
+    this.state.paciente.Documento = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
+    this.state.paciente.FdeNacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
+    this.state.paciente.Direccion = document.getElementById('Direccion').value;
+    this.state.paciente.Osocial = document.getElementById('OSocial').value;
+    this.state.paciente.Nafiliado = document.getElementById('Nafiliado').value;
+    this.state.paciente.op= false;
+    this.state.paciente.ART = document.getElementById('ART').value;
+    this.state.paciente.Nsiniestro = document.getElementById('Nsiniestro').value;
   }
 
   handleChange = event => {

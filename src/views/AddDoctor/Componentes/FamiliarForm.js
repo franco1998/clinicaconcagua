@@ -20,18 +20,16 @@ export default class FamForm extends React.Component {
         tDoc: ['DNI' , 'CI', 'LE', 'LC'],
         Doc:'-',
         selectedDate:new Date(),
-        emergencia: props.emergencia,
+        paciente: props.paciente,
       }
     }
 
     agregar (){
-       let nombre = document.getElementById('Nombre').value;
-       let apellido = document.getElementById('Apellido').value;
-       let dni = document.getElementById('TipoD').value +" "+ document.getElementById('DNI').value;
-       let nacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
-       let vinculo = document.getElementById('Vinculo').value;
-       let telefono = document.getElementById('Telefono').value;
-       this.state.emergencia.push(nombre, apellido, dni, nacimiento, vinculo, telefono);
+       this.state.paciente.NombreE = document.getElementById('Nombre').value + " " + document.getElementById('Apellido').value;
+       this.state.paciente.DocumentoE = document.getElementById('TipoD').value +" "+ document.getElementById('DNI').value;
+       this.state.paciente.FdeNacimientoE = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
+       this.state.paciente.Vinculo = document.getElementById('Vinculo').value;
+       this.state.paciente.TelefonoE= document.getElementById('Telefono').value;
      }
 
     handleChange = event => {
