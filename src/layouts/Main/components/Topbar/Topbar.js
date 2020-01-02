@@ -9,6 +9,8 @@ import InputIcon from '@material-ui/icons/Input';
 import Popover from '@material-ui/core/Popover';
 import ItemsNoti from './Components/ItemsNoti.js';
 import { Link as RouterLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../../../../store/actions/LoginActions.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,6 +82,7 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            onClick={props.signOut}
             component={RouterLink}
             to={"/Login"}
           >
@@ -104,4 +107,11 @@ Topbar.propTypes = {
   onSidebarOpen: PropTypes.func
 };
 
-export default Topbar;
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    signOut: () => dispatch(signOut())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Topbar);

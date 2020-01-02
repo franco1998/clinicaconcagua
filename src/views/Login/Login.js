@@ -11,6 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { singIn } from '../../store/actions/LoginActions.js';
 
 
 const useStyles = makeStyles(theme => ({
@@ -46,7 +48,7 @@ const Login = props => {
 
   const [state, setState] = useState({
     user: '',
-    password: ''
+    password: '',
   });
 
   const handleChange=(e)=>{
@@ -54,11 +56,10 @@ const Login = props => {
       ...state,
       [e.target.id]: e.target.value})
   }
-
-  const handleSubmit=(e)=>{
-    console.log(state);
+  const enviar=(e)=>{
+    props.singIn(state);
   }
-
+  const { authError } = props;
     return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -76,9 +77,9 @@ const Login = props => {
               margin="normal"
               required
               fullWidth
-              id="user"
+              id="email"
               label="Usuario"
-              name="user"
+              name="email"
               onChange={handleChange}
               autoFocus
             />
@@ -98,9 +99,14 @@ const Login = props => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={handleSubmit}>
+                onClick={enviar}
+                component={RouterLink}
+                to="/inicio">
                 Ingresar
               </Button>
+              <div>
+                { authError ? <p>{ authError }</p>: null }
+              </div>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
@@ -115,4 +121,16 @@ const Login = props => {
     );
   };
 
-  export default Login;
+const mapStateToProps= (state) =>{
+  return{
+    authError: state.login.authError
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    singIn:(creds) => dispatch(singIn(creds))
+  }
+}
+
+  export default connect(mapStateToProps, mapDispatchToProps)(Login);
