@@ -11,7 +11,7 @@ import DatosForm from './Componentes/DatosForm.js';
 import FamForm from './Componentes/FamiliarForm.js';
 import Review from './Componentes/Review.js';
 import Snackbar from'./Componentes/Snackbar.js';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPatients } from '../../store/actions/PatientsActions';
 
@@ -105,6 +105,18 @@ function NuevoPaciente(props) {
       props.createPatients(paciente)
   }
 
+  const { auth } = props;
+
+  if (!auth.uid) {
+    return(
+      <Redirect
+        exact
+        from="/"
+        to="/Login"
+      />
+    );
+  }
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -163,10 +175,16 @@ function NuevoPaciente(props) {
   );
 }
 
+const mapStateToProps= (state) =>{
+  return{
+    auth: state.firebase.auth,
+  }
+}
+
 const mapDispatchToProps = (dispatch) =>{
   return{
     createPatients: (paciente) => dispatch(createPatients(paciente))
   }
 }
 
-export default connect(null, mapDispatchToProps)(NuevoPaciente);
+export default connect(mapStateToProps, mapDispatchToProps)(NuevoPaciente);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { UsersToolbar, UsersTable } from './components';
+import { Link as RouterLink , Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +17,17 @@ const useStyles = makeStyles(theme => ({
 const PatientList = props => {
   const classes = useStyles();
 
-  const { pacientes } = props;
+  const { pacientes, auth } = props;
+
+  if (!auth.uid) {
+    return(
+      <Redirect
+        exact
+        from="/"
+        to="/Login"
+      />
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -32,6 +43,7 @@ const PatientList = props => {
 const mapStateToProps = (state) => {
   return{
     pacientes: state.firestore.ordered.Paciente,
+    auth: state.firebase.auth,
   }
 }
 

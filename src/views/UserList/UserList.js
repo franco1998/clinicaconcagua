@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-
+import { Link as RouterLink , Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { UsersToolbar, UsersTable } from './components';
 import mockData from './data';
 
@@ -13,10 +14,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserList = () => {
+const UserList = (props) => {
   const classes = useStyles();
 
   const [users] = useState(mockData);
+  const { auth } = props;
+
+  if (!auth.uid) {
+    return(
+      <Redirect
+        exact
+        from="/"
+        to="/Login"
+      />
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -28,4 +40,10 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+const mapStateToProps= (state) =>{
+  return{
+    auth: state.firebase.auth,
+  }
+}
+
+export default connect(mapStateToProps)(UserList);

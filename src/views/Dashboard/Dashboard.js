@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import { Link as RouterLink , Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   Budget,
@@ -17,8 +19,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const classes = useStyles();
+  const { auth } = props;
+
+  if (!auth.uid) {
+    return(
+      <Redirect
+        exact
+        from="/"
+        to="/Login"
+      />
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -85,4 +98,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps= (state) =>{
+  return{
+    auth: state.firebase.auth,
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard);

@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink , Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { singIn } from '../../store/actions/LoginActions.js';
 
@@ -47,7 +47,7 @@ const Login = props => {
   const classes = useStyles();
 
   const [state, setState] = useState({
-    user: '',
+    email: '',
     password: '',
   });
 
@@ -59,7 +59,16 @@ const Login = props => {
   const enviar=(e)=>{
     props.singIn(state);
   }
-  const { authError } = props;
+  const { authError, auth } = props;
+  console.log(auth);
+  const links = auth.uid ?
+  <Redirect
+    exact
+    from="/"
+    to="/inicio"
+  />
+  :
+    authError ? alert("Usuario y/o contraseña incorrecta."): null ;
     return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -99,14 +108,10 @@ const Login = props => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={enviar}
-                component={RouterLink}
-                to="/inicio">
+                onClick={enviar}>
                 Ingresar
               </Button>
-              <div>
-                { authError ? <p>{ authError }</p>: null }
-              </div>
+              { links }
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
@@ -123,7 +128,8 @@ const Login = props => {
 
 const mapStateToProps= (state) =>{
   return{
-    authError: state.login.authError
+    authError: state.login.authError,
+    auth: state.firebase.auth,
   }
 }
 

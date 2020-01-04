@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-
+import { Link as RouterLink , Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { AccountProfile, AccountDetails } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -10,8 +11,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Account = () => {
+const Account = (props) => {
   const classes = useStyles();
+
+  const { auth } = props;
+
+  if (!auth.uid) {
+    return(
+      <Redirect
+        exact
+        from="/"
+        to="/Login"
+      />
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -42,4 +55,10 @@ const Account = () => {
   );
 };
 
-export default Account;
+const mapStateToProps= (state) =>{
+  return{
+    auth: state.firebase.auth,
+  }
+}
+
+export default connect(mapStateToProps)(Account);

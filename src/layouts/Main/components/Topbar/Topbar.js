@@ -49,6 +49,7 @@ const Topbar = props => {
       {...rest}
       className={clsx(classes.root, className)}
     >
+
       <Toolbar>
         <div className={classes.flexGrow} />
         <Hidden>
@@ -110,7 +111,7 @@ Topbar.propTypes = {
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-    signOut: () => dispatch(signOut())
+    signOut: () => dispatch(signOut()),
   }
 }
 
