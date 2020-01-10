@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
   inline: {
     display: 'inline',
   },
+  alerta:{
+    color:'red',
+  }
 }));
 
 export default function ItemsNoti() {
@@ -41,6 +44,13 @@ export default function ItemsNoti() {
                 Nombre solicitante
               </Typography>
               {"   Paciente - Piso y cama/Habitacion "}
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.alerta}
+              >
+                Sospecha diagnostico
+              </Typography>
             </React.Fragment>
           }
         />

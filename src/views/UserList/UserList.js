@@ -4,6 +4,8 @@ import { Link as RouterLink , Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { UsersToolbar, UsersTable } from './components';
 import mockData from './data';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,8 +19,7 @@ const useStyles = makeStyles(theme => ({
 const UserList = (props) => {
   const classes = useStyles();
 
-  const [users] = useState(mockData);
-  const { auth } = props;
+  const { personal, auth } = props;
 
   if (!auth.uid) {
     return(
@@ -34,7 +35,7 @@ const UserList = (props) => {
     <div className={classes.root}>
       <UsersToolbar />
       <div className={classes.content}>
-        <UsersTable users={users} />
+        <UsersTable users={personal} />
       </div>
     </div>
   );
@@ -42,8 +43,14 @@ const UserList = (props) => {
 
 const mapStateToProps= (state) =>{
   return{
+    personal: state.firestore.ordered.Profesional,
     auth: state.firebase.auth,
   }
 }
 
-export default connect(mapStateToProps)(UserList);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    {collection: 'Profesional'}
+  ])
+)(UserList);

@@ -17,26 +17,25 @@ class DatosForm extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      Doc:'-',
-      OSocial:'-',
-      selectedDate: new Date(),
-      Docu: ['DNI' , 'CI', 'LE', 'LC'],
-      ObS: ['PAMI', 'OSDE'],
-      paciente: props.paciente,
+      usuario: props.usuario,
+      personal:props.personal,
+      profesion: ['Administrativo', 'Medico', 'Enfermero/a', 'Jefe/a enfermeria'],
+      especialidad:['Cardiología', 'Cirugía', 'Clínica Medica', 'Dermatología', 'Ginecología', 'Kinesiología', 'Nefrología', 'Neurología', 'Oncología', 'Traumatología', 'Urología'],
+      prof:'-',
+      esp:'-',
     }
   }
 
  agregar (){
-    this.state.paciente.Nombre = document.getElementById('Nombre').value + " " + document.getElementById('Apellido').value;
-    this.state.paciente.Documento = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
-    this.state.paciente.FdeNacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
-    this.state.paciente.Direccion = document.getElementById('Direccion').value;
-    this.state.paciente.Osocial = document.getElementById('OSocial').value;
-    this.state.paciente.Nafiliado = document.getElementById('Nafiliado').value;
-    this.state.paciente.op= false;
-    this.state.paciente.ART = document.getElementById('ART').value;
-    this.state.paciente.Nsiniestro = document.getElementById('Nsiniestro').value;
+    this.state.personal.Celular = document.getElementById('Celular').value;
+    this.state.personal.Email = document.getElementById('Email').value;
+    this.state.personal.Documento = document.getElementById('DNI').value;
+    this.state.personal.Profesion = document.getElementById('Profesion').value;
+    this.state.personal.Especialidad = document.getElementById('Especialidad').value;
+    this.state.personal.password=document.getElementById('DNI').value;
   }
+
+
 
   handleChange = event => {
     this.setState(oldValues => ({
@@ -44,6 +43,8 @@ class DatosForm extends React.Component {
       [event.target.name]: event.target.value,
     }));
   };
+
+
 
   handleDateChange = date => {
     this.setState({
@@ -55,43 +56,9 @@ class DatosForm extends React.Component {
     return (
       <React.Fragment>
         <Typography variant="h4" gutterBottom>
-          Datos del paciente.
+          Datos del nuevo profesional.
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="Nombre"
-              name="Nombre"
-              label="Nombre/s"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="Apellido"
-              name="Apellido"
-              label="Apellido/s"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-          <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
-          <Select
-            value={this.state.Doc}
-            onChange={this.handleChange}
-            fullWidth
-            inputProps={{
-              name: "Doc",
-              id: 'TipoD',
-            }}
-          >
-          {this.state.Docu.map((label, index) => (
-              <MenuItem value={label}>{label}</MenuItem>
-          ))}
-          </Select>
-          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -103,67 +70,71 @@ class DatosForm extends React.Component {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esp}>
-              <KeyboardDatePicker
-                margin="normal"
-                id="FechaNac"
-                label="Fecha de Nacimiento"
-                format="dd/MM/yyyy"
-                value={this.state.selectedDate}
-                onChange={this.handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
+            <InputLabel htmlFor="profesion">Profesion</InputLabel>
+              <Select
+                value={this.state.prof}
+                onChange={this.handleChange}
+                fullWidth
+                inputProps={{
+                  name: "prof",
+                  id: 'Profesion',
                 }}
-              />
-            </MuiPickersUtilsProvider>
+              >
+                {this.state.profesion.map((label, index) => (
+                    <MenuItem value={label}>{label}</MenuItem>
+                ))}
+              </Select>
           </Grid>
-          <Grid item xs={12}>
+          { this.state.prof==='Medico' ?
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="TipoD">Especialidad</InputLabel>
+              <Select
+                value={this.state.esp}
+                onChange={this.handleChange}
+                fullWidth
+                inputProps={{
+                  name: "esp",
+                  id: 'Especialidad',
+                }}
+              >
+                {this.state.especialidad.map((label, index) => (
+                    <MenuItem value={label}>{label}</MenuItem>
+                ))}
+              </Select>
+          </Grid>
+           :
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="TipoD">Especialidad</InputLabel>
+              <Select
+                value={this.state.esp}
+                onChange={this.handleChange}
+                fullWidth
+                disabled
+                inputProps={{
+                  name: "esp",
+                  id: 'Especialidad',
+                }}
+              >
+              </Select>
+          </Grid>
+        }
+          <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="Direccion"
-              name="Direccion"
-              label="Dirección"
+              type='email'
+              id="Email"
+              name="email"
+              label="Email"
               fullWidth
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel htmlFor="OSocial">Obra Social</InputLabel>
-            <Select
-              value={this.state.OSocial}
-              onChange={this.handleChange}
-              name="OSocial"
-              fullWidth
-              inputProps={{
-                id: 'OSocial',
-              }}
-            >
-            {this.state.ObS.map((label, index)=>(
-              <MenuItem value={label}>{label}</MenuItem>
-            ))}
-            </Select>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              fullWidth
-              id="Nafiliado"
-              name="Nafiliado"
-              label="Numero de afiliado"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="ART"
-              name="ART"
-              label="ART"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="Nsiniestro"
-              name="NSiniestro"
-              label="Numero de Denuncia o Siniestro"
+              type={'number'}
+              id="Celular"
+              name="Telefono"
+              label="Celular"
               fullWidth
             />
           </Grid>

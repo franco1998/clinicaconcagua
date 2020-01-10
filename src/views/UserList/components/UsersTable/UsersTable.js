@@ -66,15 +66,13 @@ const UsersTable = props => {
               <TableHead>
                 <TableRow>
                   <TableCell>Nombre</TableCell>
-                  <TableCell>Apellido</TableCell>
                   <TableCell>Profesion</TableCell>
-                  <TableCell>Direccion</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Celular</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
+                {users && users.map(user => (
                   <TableRow
                     className={classes.tableRow}
                     hover
@@ -82,18 +80,13 @@ const UsersTable = props => {
                     selected={selectedUsers.indexOf(user.id) !== -1}
                   >
                     <TableCell>
-                        <Typography variant="body1">{user.nombre}</Typography>
+                        <Typography variant="body1">{user.Nombre}</Typography>
                     </TableCell>
+                    <TableCell>{user.Profesion}</TableCell>
+                    <TableCell>{user.Especialidad}</TableCell>
+                    <TableCell>{user.Email}</TableCell>
                     <TableCell>
-                        <Typography variant="body1">{user.apellido}</Typography>
-                    </TableCell>
-                    <TableCell>{user.profesion}</TableCell>
-                    <TableCell>
-                      {user.direccion.calle}, {user.direccion.localidad},
-                    </TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      {user.celular}
+                      {user.Celular}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -105,7 +98,6 @@ const UsersTable = props => {
       <CardActions className={classes.actions}>
         <TablePagination
           component="div"
-          count={users.length}
           onChangePage={handlePageChange}
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}

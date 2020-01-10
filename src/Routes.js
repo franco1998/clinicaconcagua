@@ -8,13 +8,14 @@ import {
   Dashboard as DashboardView,
   PatientList as PatientListView,
   UserList as UserListView,
-  AddDoctor as AddDoctorView,
+  AddPaciente as AddPacienteView,
   Secciones as SeccionesView,
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
   Inicio as Inicioview,
   Login as LoginView,
+  AddDoctor as AddDoctorView,
 } from './views';
 
 import {
@@ -45,7 +46,7 @@ const Routes = () => {
         component={UserListView}
         exact
         layout={MainLayout}
-        path="/doctores"
+        path="/personal"
       />
       <RouteWithLayout
         component={PatientListView}
@@ -84,7 +85,7 @@ const Routes = () => {
         path="/SeccionesE"
       />
       <RouteWithLayout
-        component={AddDoctorView}
+        component={AddPacienteView}
         exact
         layout={MainLayout}
         path="/Nuevo-Pac"
@@ -94,6 +95,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/Inicio"
+      />
+      <RouteWithLayout
+        component={AddDoctorView}
+        exact
+        layout={MainLayout}
+        path="/nuevoProfesional"
       />
       <Redirect to="/not-found" />
     </Switch>

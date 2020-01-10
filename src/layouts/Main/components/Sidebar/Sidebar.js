@@ -57,7 +57,7 @@ const Sidebar = props => {
     },
     {
       title: 'Personal de la clinica',
-      href: '/doctores',
+      href: '/personal',
       icon: <PeopleIcon />
     },
     {
@@ -70,7 +70,11 @@ const Sidebar = props => {
       href: '/account',
       icon: <AccountBoxIcon />
     },
-
+    {
+      title:'Cerrar Sesion',
+      href:'/Login',
+      icon:<HomeIcon/>
+    },
   ];
   const handleclickeado = (event) =>{
     event.preventDefault();

@@ -19,6 +19,18 @@ const LoginReducer = (state=initState, action) =>{
       case 'SIGNOUT_SUCCESS':
         console.log('saliendo..');
         return state;
+      case 'SIGNUP_SUCCESS':
+        console.log('registro completp');
+        return {
+            ...state,
+            authError:null,
+        }
+      case 'SIGNUP_ERROR':
+      console.log('Error Registro');
+        return {
+          ...state,
+          authError: action.err.message,
+        }
     default:
       return state;
   }
