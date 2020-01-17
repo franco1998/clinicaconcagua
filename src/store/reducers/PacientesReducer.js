@@ -1,22 +1,5 @@
 const initState = {
-  Paciente: [
-    {
-      Nombre: '',
-      Documento: '',
-      FdeNacimiento: '',
-      Direccion:'',
-      Osocial:'',
-      op:'',
-      Nafiliado:'',
-      ART:'',
-      Nsiniestro:'',
-      NombreE:'',
-      DocumentoE:'',
-      FdeNacimientoE:'',
-      Vinculo:'',
-      TelefonoE:'',
-    }
-  ]
+  Paciente: [],
 };
 
 const PacientesReducer = (state = initState, action) =>{
@@ -26,6 +9,9 @@ const PacientesReducer = (state = initState, action) =>{
       return state;
     case 'CREATE_PATIENT_ERROR':
       console.log('Error', action.err);
+      return state;
+    case 'FIND_PAT':
+      state.Paciente=action.p;
       return state;
     default:
       return state;

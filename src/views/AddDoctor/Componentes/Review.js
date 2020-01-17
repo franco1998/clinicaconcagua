@@ -31,6 +31,15 @@ export default function Review(props) {
           <Grid item xs={12} sm={6} className={classes.title}>
             {usuario.Profesion}
           </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {usuario.Especialidad}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {usuario.Email}
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.title}>
+            {usuario.Celular}
+          </Grid>
         </Grid>
     </React.Fragment>
   );

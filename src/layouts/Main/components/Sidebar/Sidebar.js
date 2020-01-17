@@ -8,6 +8,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import HomeIcon from '@material-ui/icons/Home';
+import { connect } from 'react-redux';
+import {signOut} from '../../../../store/actions/LoginActions.js';
 
 import { Profile, SidebarNav } from './components';
 
@@ -70,6 +72,9 @@ const Sidebar = props => {
       href: '/account',
       icon: <AccountBoxIcon />
     },
+  ];
+
+  const pages2 =[
     {
       title:'Cerrar Sesion',
       href:'/Login',
@@ -98,6 +103,11 @@ const Sidebar = props => {
           pages={pages}
           onClick={handleclickeado}
         />
+        <SidebarNav
+          className={classes.nav}
+          pages={pages2}
+          onClick={props.signOut}
+        />
       </div>
     </Drawer>
   );
@@ -110,4 +120,10 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired
 };
 
-export default Sidebar;
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    signOut: () => dispatch(signOut()),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Sidebar);

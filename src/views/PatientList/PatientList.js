@@ -5,6 +5,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { UsersToolbar, UsersTable } from './components';
 import { Link as RouterLink , Redirect } from 'react-router-dom';
+import { buscar } from '../../store/actions/PatientsActions.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 const PatientList = props => {
   const classes = useStyles();
 
-  const { pacientes, auth } = props;
+  const { pacientes, auth, encontrado } = props;
 
   if (!auth.uid) {
     return(
@@ -39,16 +40,24 @@ const PatientList = props => {
   );
 };
 
+const n = "DNI 41";
 
 const mapStateToProps = (state) => {
   return{
     pacientes: state.firestore.ordered.Paciente,
     auth: state.firebase.auth,
+    encontrado: state.paciente.Paciente,
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+  buscar: dispatch(buscar(n)),
   }
 }
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps,mapDispatchToProps),
   firestoreConnect([
     {collection: 'Paciente'}
   ])
