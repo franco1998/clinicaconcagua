@@ -95,7 +95,7 @@ function NuevoPersonal(props) {
       props.signUp(personal);
   }
 
-  const { auth, authError } = props;
+  const { auth } = props;
 
   if (!auth.uid) {
     return(

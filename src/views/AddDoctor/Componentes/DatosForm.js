@@ -6,8 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import DateFnsUtils from '@date-io/date-fns';
-import esp from 'date-fns/locale/es';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,

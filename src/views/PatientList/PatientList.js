@@ -40,8 +40,6 @@ const PatientList = props => {
   );
 };
 
-const n = "DNI 41";
-
 const mapStateToProps = (state) => {
   return{
     pacientes: state.firestore.ordered.Paciente,
@@ -50,14 +48,14 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) =>{
-  return{
-  buscar: dispatch(buscar(n)),
-  }
-}
+// const mapDispatchToProps = (dispatch) =>{
+//   return{
+//   buscar: dispatch(buscar(n)),
+//   }
+// }
 
 export default compose(
-  connect(mapStateToProps,mapDispatchToProps),
+  connect(mapStateToProps),
   firestoreConnect([
     {collection: 'Paciente'}
   ])

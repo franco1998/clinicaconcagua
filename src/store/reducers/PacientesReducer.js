@@ -1,5 +1,5 @@
 const initState = {
-  Paciente: [],
+  Paciente: null,
 };
 
 const PacientesReducer = (state = initState, action) =>{

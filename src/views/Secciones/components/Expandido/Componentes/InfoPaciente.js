@@ -56,6 +56,9 @@ export default function InfoPaciente() {
           <CardActions>
             <Button size="small">Dar de Alta</Button>
           </CardActions>
+          <CardActions>
+            <Button size="small">Cambiar de cama</Button>
+          </CardActions>
         </Card>
       </Grid>
       <Grid item xs={12} sm={9}>
