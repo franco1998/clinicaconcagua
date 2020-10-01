@@ -1,5 +1,6 @@
 const initState = {
   Paciente: null,
+  Id: null,
 };
 
 const PacientesReducer = (state = initState, action) =>{
@@ -12,6 +13,7 @@ const PacientesReducer = (state = initState, action) =>{
       return state;
     case 'FIND_PAT':
       state.Paciente=action.p;
+      state.Id =action.id;
       return state;
     default:
       return state;

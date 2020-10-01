@@ -16,14 +16,15 @@ export const buscar = (dni) =>{
   return( dispatch, getState, {getFirebase, getFirestore}) =>{
     const firestore = getFirestore();
     const p= [];
+    const id = [];
     firestore.collection("Paciente").where("Documento", "==", dni)
     .get()
     .then((encontrado) => {
        encontrado.forEach( (doc) => {
          p.push(doc.data());
-         console.log(dni);
+         id.push(doc.id);
       });
-      dispatch({type: 'FIND_PAT', p});
+      dispatch({type: 'FIND_PAT', p, id});
     }).catch((err) => {
         console.log("Error getting documents: ", err)});
   }

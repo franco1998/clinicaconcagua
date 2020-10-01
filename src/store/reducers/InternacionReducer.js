@@ -1,5 +1,6 @@
 const initState = {
   Internacion: null,
+  Id: null,
 };
 
 const InternacionReducer = (state = initState, action) =>{
@@ -11,7 +12,8 @@ const InternacionReducer = (state = initState, action) =>{
       console.log('Error', action.err);
       return state;
     case 'FIND_INT':
-      state.Paciente=action.p;
+      state.Internacion=action.int;
+      state.Id=action.id;
       return state;
     default:
       return state;

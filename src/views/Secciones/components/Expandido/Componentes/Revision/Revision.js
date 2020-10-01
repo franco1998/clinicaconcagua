@@ -1,45 +1,42 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+  root: {
+    flexGrow: 1,
   },
-  contenedor: {
-    alignItems:'center',
+  paper1: {
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    height: '100%',
   },
-  texto: {
-    marginTop: '20px'
+  paper2: {
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
-  details: {
-    display: 'flex'
-  },
-  }));
+}));
 
-function Revision (props) {
+function Revision() {
   const classes = useStyles();
 
-  return(
-    <Grid container
-      spacing={3}
-      direction="column"
-      justify="center"
-      alignItems="center"
-      cell= '2'
-    >
-      <Grid item xs={6} sm={3}>
-        ULTIMAS REVISIONES Y DIAGNOSTICOS...
-        <Grid item xs={6} sm={3}>
-          NUTRICION...
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Paper className={classes.paper1} elevation={3}>Ultimas Revisiones y diagnosticos</Paper>
         </Grid>
-        <Grid item xs={6} sm={3}>
-          SIGNOS VITALES...
+        <Grid item xs={6}>
+          <Paper className={classes.paper2} elevation={3}>Nutricion</Paper>
+          <Paper className={classes.paper2} elevation={3}>Signos vitales</Paper>
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 }
 

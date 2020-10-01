@@ -65,6 +65,7 @@ export default function SimpleTabs() {
           <Tab label="Diagnostico actual" {...a11yProps(0)} />
           <Tab label="Estudios" {...a11yProps(1)} />
           <Tab label="Interconsultas" {...a11yProps(2)} />
+          <Tab label="Enfermería" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -75,6 +76,9 @@ export default function SimpleTabs() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Interconsultas/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Enfermeria
       </TabPanel>
     </div>
   );

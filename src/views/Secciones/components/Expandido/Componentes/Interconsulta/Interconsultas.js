@@ -5,6 +5,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { buscarP } from '../../../../../../store/actions/PersonalActions.js';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,13 +52,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Interconsultas() {
+function Interconsultas(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const { profesional } = props;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleBuscar = (e) =>{
+    props.buscarP(e.key);
+  }
 
   return (
     <div className={classes.root}>
@@ -80,8 +89,9 @@ export default function Interconsultas() {
       <TabPanel value={value} index={0}>
         Neurología
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        Cirugía
+      <TabPanel value={value} key="Cirugía" index={1} onClick={handleBuscar}>
+        Por favor, seleccione el profesional de Cirugía al que desea llamar.
+        <br/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Cardiología
@@ -110,3 +120,24 @@ export default function Interconsultas() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  console.log(state.profesional);
+  return{
+    profesional: state.profesional,
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+  buscarP: (especialidad) => dispatch(buscarP(especialidad)),
+  }
+}
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    {collection: 'Profesion}'}
+  ])
+)(Interconsultas);

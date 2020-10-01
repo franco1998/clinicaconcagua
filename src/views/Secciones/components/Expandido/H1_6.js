@@ -131,7 +131,7 @@ function H1_6 (props){
         {
           state.cama != '' ?
           document.getElementById(state.cama).classList.contains("ocupado") ?
-            <InfoPaciente/>
+            <InfoPaciente info={state}/>
             :
             <NoPaciente info={state}/>
           :

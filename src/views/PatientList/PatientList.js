@@ -35,6 +35,7 @@ const PatientList = props => {
       <UsersToolbar />
       <div className={classes.content}>
         <UsersTable users={pacientes}/>
+        {console.log(encontrado)}
       </div>
     </div>
   );
@@ -48,14 +49,16 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = (dispatch) =>{
-//   return{
-//   buscar: dispatch(buscar(n)),
-//   }
-// }
+const n= "23123";
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+  buscar: dispatch(buscar(n)),
+  }
+}
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
     {collection: 'Paciente'}
   ])
