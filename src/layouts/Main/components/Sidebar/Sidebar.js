@@ -52,12 +52,25 @@ const Sidebar = props => {
       href: '/dashboard',
       icon: <DashboardIcon />
     },
-    {
-      title: 'Secciones',
+  ];
+    const pagesS = [{
+      title: 'Planta Baja',
       href: '/secciones',
       icon: <LockOpenIcon />
     },
     {
+      title: 'Primer Piso',
+      href: '/secciones',
+      icon: <LockOpenIcon />
+    },
+    {
+      title: 'Segundo Piso',
+      href: '/secciones',
+      icon: <LockOpenIcon />
+    },
+  ];
+    const pagesPersonas = [
+      {
       title: 'Personal de la clinica',
       href: '/personal',
       icon: <PeopleIcon />
@@ -102,6 +115,18 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
           onClick={handleclickeado}
+        />
+        Secciones
+        <Divider className={classes.divider} />
+        <SidebarNav
+          className={classes.nav}
+          pages={pagesS}
+          onClick={props.signOut}
+        />
+        <SidebarNav
+          className={classes.nav}
+          pages={pagesPersonas}
+          onClick={props.signOut}
         />
         <SidebarNav
           className={classes.nav}
