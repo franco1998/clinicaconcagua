@@ -9,7 +9,7 @@ import {
   PatientList as PatientListView,
   UserList as UserListView,
   AddPaciente as AddPacienteView,
-  Secciones as SeccionesView,
+  PlantaBaja as PlantaBajaView,
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
@@ -55,10 +55,10 @@ const Routes = () => {
         path="/pacientes"
       />
       <RouteWithLayout
-        component={SeccionesView}
+        component={PlantaBajaView}
         exact
         layout={MainLayout}
-        path="/secciones"
+        path="/Planta-Baja"
       />
       <RouteWithLayout
         component={AccountView}

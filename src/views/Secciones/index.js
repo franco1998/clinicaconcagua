@@ -1,1 +1,1 @@
-export { default } from './Secciones';
+export { default } from './PlantaBaja.js';

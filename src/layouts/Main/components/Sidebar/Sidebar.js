@@ -55,7 +55,7 @@ const Sidebar = props => {
   ];
     const pagesS = [{
       title: 'Planta Baja',
-      href: '/secciones',
+      href: '/Planta-Baja',
       icon: <LockOpenIcon />
     },
     {
@@ -126,7 +126,7 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pagesPersonas}
-          onClick={props.signOut}
+          onClick={props.signOut}as
         />
         <SidebarNav
           className={classes.nav}
