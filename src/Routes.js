@@ -10,6 +10,8 @@ import {
   UserList as UserListView,
   AddPaciente as AddPacienteView,
   PlantaBaja as PlantaBajaView,
+  P1 as P1View,
+  P2 as P2View,
   Account as AccountView,
   Settings as SettingsView,
   NotFound as NotFoundView,
@@ -61,6 +63,18 @@ const Routes = () => {
         path="/Planta-Baja"
       />
       <RouteWithLayout
+        component={P1View}
+        exact
+        layout={MainLayout}
+        path="/P1"
+      />
+      <RouteWithLayout
+        component={P2View}
+        exact
+        layout={MainLayout}
+        path="/P2"
+      />
+      <RouteWithLayout
         component={AccountView}
         exact
         layout={MainLayout}
@@ -77,12 +91,6 @@ const Routes = () => {
         exact
         layout={MinimalLayout}
         path="/not-found"
-      />
-      <RouteWithLayout
-        component={ExpandeView}
-        exact
-        layout={MainLayout}
-        path="/SeccionesE"
       />
       <RouteWithLayout
         component={AddPacienteView}

@@ -35,7 +35,7 @@ const PatientList = props => {
       <UsersToolbar />
       <div className={classes.content}>
         <UsersTable users={pacientes}/>
-        {console.log(encontrado)}
+        {console.log("====>" + encontrado)}
       </div>
     </div>
   );

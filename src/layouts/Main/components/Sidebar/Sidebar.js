@@ -60,12 +60,12 @@ const Sidebar = props => {
     },
     {
       title: 'Primer Piso',
-      href: '/secciones',
+      href: '/P1',
       icon: <LockOpenIcon />
     },
     {
       title: 'Segundo Piso',
-      href: '/secciones',
+      href: '/P2',
       icon: <LockOpenIcon />
     },
   ];
@@ -121,12 +121,12 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pagesS}
-          onClick={props.signOut}
+          onClick={handleclickeado}
         />
         <SidebarNav
           className={classes.nav}
           pages={pagesPersonas}
-          onClick={props.signOut}as
+          onClick={handleclickeado}as
         />
         <SidebarNav
           className={classes.nav}

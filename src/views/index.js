@@ -1,6 +1,8 @@
 export { default as Account } from './Account';
 export { default as Dashboard } from './Dashboard';
-export { default as PlantaBaja } from './Secciones';
+export { PlantaBaja } from './Secciones';
+export { P1 } from './Secciones';
+export {  P2 } from './Secciones';
 export { default as NotFound } from './NotFound';
 export { default as PatientList } from './PatientList';
 export { default as Settings } from './Settings';
