@@ -126,7 +126,7 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pagesPersonas}
-          onClick={handleclickeado}as
+          onClick={handleclickeado}
         />
         <SidebarNav
           className={classes.nav}

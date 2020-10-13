@@ -6,6 +6,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { connect } from 'react-redux';
+import { Link as RouterLink , Redirect } from 'react-router-dom';
+import Camas from './components/camas.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,8 +19,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function P2() {
+function P2(props) {
   const classes = useStyles();
+  const { auth } = props;
+
+  if (!auth.uid) {
+    return(
+      <Redirect
+        exact
+        from="/"
+        to="/Login"
+      />
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -28,13 +41,10 @@ function P2() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>Accordion 1</Typography>
+          <Typography className={classes.heading}>Segundo Piso </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+          <Camas seccion={"P2"}/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -43,23 +53,11 @@ function P2() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.heading}>Accordion 2</Typography>
+          <Typography className={classes.heading}>Habitaciones 2° Piso</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+          <Camas seccion={"HabP2"}/>
         </AccordionDetails>
-      </Accordion>
-      <Accordion disabled>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography className={classes.heading}>Disabled Accordion</Typography>
-        </AccordionSummary>
       </Accordion>
     </div>
   );
