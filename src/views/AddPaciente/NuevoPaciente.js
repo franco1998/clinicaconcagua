@@ -86,14 +86,15 @@ function getStepContent(step,props) {
   }
 }
 
+
 function NuevoPaciente(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
-    if(activeStep !== 2){
-      form.current.agregar();
+
+    if(activeStep !== 2 && form.current.agregar()){
+          setActiveStep(activeStep + 1);
     }
   };
 
@@ -117,16 +118,18 @@ function NuevoPaciente(props) {
     );
   }
 
+
   return (
     <React.Fragment>
       <CssBaseline />
+
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             Nuevo paciente
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map(label => (
+            {  steps.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
@@ -139,10 +142,24 @@ function NuevoPaciente(props) {
                 </React.Fragment>
             ) : (
               <React.Fragment>
+
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  component={RouterLink}
+                  to={"/pacientes"}
+                >
+                Cancelar
+                </Button>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
+                    <Button
+                    onClick={handleBack}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}>
                       Atras
                     </Button>
                   )}
@@ -157,14 +174,14 @@ function NuevoPaciente(props) {
                       >
                       Finalizar
                       </Button>
-                     : <Button
-                       variant="contained"
-                       color="primary"
-                       onClick={handleNext}
-                       className={classes.button}
-                     >
-                     Siguiente
-                     </Button>}
+                     :<Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                      Siguiente
+                      </Button>}
                 </div>
               </React.Fragment>
             )}
