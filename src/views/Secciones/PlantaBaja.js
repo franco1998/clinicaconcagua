@@ -56,7 +56,7 @@ function PlantaBaja ( props ) {
           <Typography className={classes.heading}>UTI</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Camas seccion={"UTI"}/>
+          <Camas seccion={"UTI"} id={null}/>
         </AccordionDetails>
       </Accordion>
       <Accordion>

@@ -20,9 +20,6 @@ import {
   AddDoctor as AddDoctorView,
 } from './views';
 
-import {
-  Expande as ExpandeView
-} from './views/Secciones/components/Expandido';
 
 const Routes = () => {
   return (

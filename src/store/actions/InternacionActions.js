@@ -1,23 +1,22 @@
-export const asignar = (info, id) =>{
+export const createInternacion = (cama, paciente) =>{
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase =getFirebase();
     const dia = new Date();
     const user= firebase.auth().currentUser;
     const internacion = {
-      cama: info.cama,
-      piso: info.piso,
-      seccion: info.seccion,
-      Idpaciente: id,
+      cama: cama,
+      paciente:paciente,
       fechaIngreso: dia,
       Medico:null,
+      fechaEgreso:null,
+      estudioPendiente: 0,
+      idHoja:null,
     }
     const med= firestore.collection("Profesional").doc(user.uid)
     .get()
     .then((encontrado) => {
-      console.log("blabla", encontrado);
       internacion.Medico=encontrado.id;
-      console.log(internacion.Medico);
       firestore.collection('Internacion').add({
         ...internacion,
       }).then(() => {
