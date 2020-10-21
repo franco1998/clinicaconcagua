@@ -21,6 +21,7 @@ export const buscar = (dni) =>{
     .get()
     .then((encontrado) => {
        encontrado.forEach( (doc) => {
+         console.log("BD---> " + doc.data());
          p.push(doc.data());
          id.push(doc.id);
       });

@@ -13,6 +13,8 @@ import { compose } from 'redux';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 import InfoIcon from '@material-ui/icons/Info';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -22,6 +24,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import { Link as RouterLink } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { buscar } from '../../../store/actions/PatientsActions.js';
@@ -102,36 +105,49 @@ const DialogActions = withStyles((theme) => ({
 
 function Camas(props) {
   const {camas} = props
-  var {paciente, internaciones} = props
+  var {paciente} = props
+  const{internaciones} = props
   const [state, setState] = React.useState({
     existe: null,
     texto:"Por favor, ingrese el documento del paciente",
     doc:'',
+    docum:null,
+    confirmacion:null,
+    noBD:false,
   });
   const [id, setId] = React.useState('');
   const seccion = props.seccion
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [openNP, setOpenNP] = React.useState(false);
   const docu = ['DNI' , 'CI', 'LE', 'LC'];
 
   //al abrir un <Dialog/>
 
-  const handleClickOpen = (event) => {
+  const handleClickOpenNP = (event) => {
     setState({
       existe:false,
       texto: "Por favor, ingrese el documento del paciente",
+      docum:false,
+      confirmacion: null,
+      noBD: false,
     });
-    setOpen(true);
+    setOpenNP(true);
     setId(event.target.id);
-    console.log(id);
   };
 
   //al cerrar un <Dialog/>
-  const handleClose = () => {
+  const handleCloseNP = () => {
     if(props.paciente!=null){
       props.paciente[0]=null;
     }
-    setOpen(false);
+    setState({
+      existe:false,
+      texto: "Por favor, ingrese el documento del paciente",
+      docum:false,
+      confirmacion: null,
+      noBD: false,
+    });
+    setOpenNP(false);
   };
 
   //al limpiar el TEXTFIELD documento
@@ -157,13 +173,13 @@ function Camas(props) {
   //asignar un paciente a la cama
 
   const asignar = () => {
-    console.log("asignar " + id)
     camas.map(cama =>{
       if(cama.paciente!=null){
         if(cama.paciente.Documento == paciente[0].Documento) {
           setState({
             existe : true,
             texto:"El paciente ya esta asignado a una cama",
+            docum:true,
           })
           state.existe = true
           state.texto=  "El paciente ya esta asignado a una cama"
@@ -171,12 +187,11 @@ function Camas(props) {
         }
       }
     })
-    console.log("antes del if " + id)
     if(!state.existe){
         console.log(id)
         props.asignarP(paciente[0], id, seccion)
         props.createInternacion(id, paciente[0])
-        handleClose()
+        handleCloseNP()
     }
   }
 
@@ -184,15 +199,20 @@ function Camas(props) {
 
   const buscarP= (e) =>
   {
-    if(document.getElementById("documento").value ==''){
+    if( document.getElementById("documento").value =='' || state.doc==''){
       setState({
         texto:"Debe ingresar un documento sin puntos",
         existe: true,
+        docum: true,
       });
     }
     else{
-      props.buscar(document.getElementById("documento").value);
-      console.log(id)
+      var dn = document.getElementById("TipoD").value + document.getElementById('documento').value;
+      props.buscar(dn);
+      if(paciente==null || paciente==''){
+        state.confirmacion = "El paciente no se encuentra, desea agregarlo?"
+        state.noBD = true
+      }
     }
   }
 
@@ -219,7 +239,7 @@ function Camas(props) {
               </CardContent>
                 <CardActions id={cama.id}>
                   <IconButton id={cama.id} aria-label="internar"
-                  onClick={handleClickOpen}
+                  onClick={handleClickOpenNP}
                   >
                     <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" id={cama.id}>
                       <path id={cama.id}d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
@@ -261,19 +281,19 @@ function Camas(props) {
           : null
           )}
 
-          <Dialog onClose={handleClose} align="center" aria-labelledby="customized-dialog-title" open={open}>
-            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <Dialog onClose={handleCloseNP} align="center" aria-labelledby="customized-dialog-title" open={openNP}>
+            <DialogTitle id="customized-dialog-title" onClose={handleCloseNP}>
               Asignar un paciente
             </DialogTitle>
             <DialogContent dividers>
-              <Grid container spacing={3} direction="row"
+              <Grid container spacing={3}
                   justify="center"
                   alignItems="center">
                 <Grid item xs={8} sm={4} >
                   <Select
                     value={state.doc}
                     fullWidth
-                    label="Tipo Doc"
+                    error={state.docum}
                     onChange={handleChangeD}
                     inputProps={{
                       name: "doc",
@@ -298,10 +318,23 @@ function Camas(props) {
                   />
                 </Grid>
               </Grid>
-
+              <br/>
               { paciente == null || paciente == ''?
-                <Typography gutterBottom error={state.existe}>
-                </Typography>
+                state.noBD ?
+                  <div>
+                    <Typography gutterBottom error={state.noBD}>
+                      El paciente no se encuentra, desea agregarlo?
+                    </Typography>
+                    <IconButton aria-label="agregar"
+                      component={RouterLink}
+                      to={"/Nuevo-Pac"}>
+                      <CheckIcon />
+                    </IconButton>
+                    <IconButton aria-label="salir" onClick={handleCloseNP}>
+                      <ClearIcon/>
+                    </IconButton>
+                  </div>
+                  :null
                 :
                 <Typography gutterBottom>
                   Paciente: {paciente[0].Nombre}
@@ -318,6 +351,33 @@ function Camas(props) {
                 </Button>
             }
             </DialogActions>
+          </Dialog>
+          //
+          // Informacion sobre internado
+          //
+          <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+            <AppBar className={classes.appBar}>
+              <Toolbar>
+                <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                  <CloseIcon />
+                </IconButton>
+                <Typography variant="h6" className={classes.title}>
+                  Sound
+                </Typography>
+                <Button autoFocus color="inherit" onClick={handleClose}>
+                  save
+                </Button>
+              </Toolbar>
+            </AppBar>
+            <List>
+              <ListItem button>
+                <ListItemText primary="Phone ringtone" secondary="Titania" />
+              </ListItem>
+              <Divider />
+              <ListItem button>
+                <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+              </ListItem>
+            </List>
           </Dialog>
       </Grid>
   );
