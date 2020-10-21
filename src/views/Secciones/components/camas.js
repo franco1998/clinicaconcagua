@@ -118,12 +118,12 @@ function Camas(props) {
   const [id, setId] = React.useState('');
   const seccion = props.seccion
   const classes = useStyles();
-  const [openNP, setOpenNP] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const docu = ['DNI' , 'CI', 'LE', 'LC'];
 
   //al abrir un <Dialog/>
 
-  const handleClickOpenNP = (event) => {
+  const handleClickOpen = (event) => {
     setState({
       existe:false,
       texto: "Por favor, ingrese el documento del paciente",
@@ -131,12 +131,12 @@ function Camas(props) {
       confirmacion: null,
       noBD: false,
     });
-    setOpenNP(true);
+    setOpen(true);
     setId(event.target.id);
   };
 
   //al cerrar un <Dialog/>
-  const handleCloseNP = () => {
+  const handleClose = () => {
     if(props.paciente!=null){
       props.paciente[0]=null;
     }
@@ -147,7 +147,7 @@ function Camas(props) {
       confirmacion: null,
       noBD: false,
     });
-    setOpenNP(false);
+    setOpen(false);
   };
 
   //al limpiar el TEXTFIELD documento
@@ -191,7 +191,7 @@ function Camas(props) {
         console.log(id)
         props.asignarP(paciente[0], id, seccion)
         props.createInternacion(id, paciente[0])
-        handleCloseNP()
+        handleClose()
     }
   }
 
@@ -239,7 +239,7 @@ function Camas(props) {
               </CardContent>
                 <CardActions id={cama.id}>
                   <IconButton id={cama.id} aria-label="internar"
-                  onClick={handleClickOpenNP}
+                  onClick={handleClickOpen}
                   >
                     <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" id={cama.id}>
                       <path id={cama.id}d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
@@ -281,8 +281,8 @@ function Camas(props) {
           : null
           )}
 
-          <Dialog onClose={handleCloseNP} align="center" aria-labelledby="customized-dialog-title" open={openNP}>
-            <DialogTitle id="customized-dialog-title" onClose={handleCloseNP}>
+          <Dialog onClose={handleClose} align="center" aria-labelledby="customized-dialog-title" open={open}>
+            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
               Asignar un paciente
             </DialogTitle>
             <DialogContent dividers>
@@ -330,7 +330,7 @@ function Camas(props) {
                       to={"/Nuevo-Pac"}>
                       <CheckIcon />
                     </IconButton>
-                    <IconButton aria-label="salir" onClick={handleCloseNP}>
+                    <IconButton aria-label="salir" onClick={handleClose}>
                       <ClearIcon/>
                     </IconButton>
                   </div>
@@ -351,33 +351,6 @@ function Camas(props) {
                 </Button>
             }
             </DialogActions>
-          </Dialog>
-          //
-          // Informacion sobre internado
-          //
-          <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-                  <CloseIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                  Sound
-                </Typography>
-                <Button autoFocus color="inherit" onClick={handleClose}>
-                  save
-                </Button>
-              </Toolbar>
-            </AppBar>
-            <List>
-              <ListItem button>
-                <ListItemText primary="Phone ringtone" secondary="Titania" />
-              </ListItem>
-              <Divider />
-              <ListItem button>
-                <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-              </ListItem>
-            </List>
           </Dialog>
       </Grid>
   );
