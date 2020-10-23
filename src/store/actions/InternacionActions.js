@@ -8,7 +8,7 @@ export const createInternacion = (cama, paciente) =>{
       cama: cama,
       paciente:paciente,
       fechaIngreso: dia,
-      Medico:null,
+      medico:null,
       fechaEgreso:null,
       estudioPendiente: 0,
       idHoja:null,
@@ -16,7 +16,7 @@ export const createInternacion = (cama, paciente) =>{
     const med= firestore.collection("Profesional").doc(user.uid)
     .get()
     .then((encontrado) => {
-      internacion.Medico=encontrado.id;
+      internacion.medico=encontrado.id;
       firestore.collection('Internacion').add({
         ...internacion,
       }).then(() => {
@@ -25,25 +25,32 @@ export const createInternacion = (cama, paciente) =>{
         dispatch({type: 'CREATE_INTERNACION_ERROR', err});
       })
     });
-
-
   }
 };
 
-export const buscarI = ( cama) =>{
+export const buscarI = (cama) =>{
   return( dispatch, getState, {getFirebase, getFirestore}) =>{
     const firestore = getFirestore();
     var int= '';
     var id ='';
-    firestore.collection("Internacion").where("cama", "==", cama)
+    firestore.collection("Internacion").where("fechaEgreso", "==", null)
     .get()
     .then((encontrado) => {
-       encontrado.forEach( (doc) => {
-         int = doc.data();
-         id= doc.id
-      });
+         int = encontrado.docs;
       dispatch({type: 'FIND_INT', int, id});
     }).catch((err) => {
         console.log("Error getting documents: ", err)});
   }
 };
+
+export const darAlta = (id) =>{
+  return( dispatch, getState, {getFirebase, getFirestore}) => {
+    const firestore = getFirestore();
+    const dia = new Date();
+    firestore.collection("Internacion").doc(id).update("fechaEgreso", dia).then(() => {
+      dispatch({type:"DAR_ALTA"});
+    }).catch((err) => {
+      dispatch({ type: "ERROR_ALTA" , err})
+    });
+  }
+}

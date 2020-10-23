@@ -12,9 +12,14 @@ const PacientesReducer = (state = initState, action) =>{
       console.log('Error', action.err);
       return state;
     case 'ADD_PAT':
-      // state.Cama=action.p;
-      // state.Paciente =action.id;
+      console.log("Se asigno paciente");
       return state;
+    case 'LIBERAR_CAMA':
+       console.log("Se libero la cama");
+       return state;
+    case 'ERROR_LIBERAR':
+      console.log("No se pudo liberar la cama", action.err);
+      return state
     default:
       return state;
   }

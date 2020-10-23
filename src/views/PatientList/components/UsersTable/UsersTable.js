@@ -16,6 +16,7 @@ import {
   TablePagination
 } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
+import Progress from './Progress.js';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -77,7 +78,10 @@ const UsersTable = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users && users.map(user => (
+                { users == null ?
+                  <Progress/>
+                  :
+                   users.map(user => (
                   <TableRow
                     className={classes.tableRow}
                     hover

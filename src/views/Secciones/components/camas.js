@@ -24,15 +24,24 @@ import CloseIcon from '@material-ui/icons/Close';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Slide from '@material-ui/core/Slide';
 import { Link as RouterLink } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { buscar } from '../../../store/actions/PatientsActions.js';
 import '../../../App.css';
 import { asignarP } from '../../../store/actions/CamasActions.js';
+import { liberarCama } from '../../../store/actions/CamasActions.js';
 import {createInternacion} from '../../../store/actions/InternacionActions.js';
+import { darAlta } from '../../../store/actions/InternacionActions.js';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor:"#cacaca",
@@ -59,6 +68,17 @@ const useStyles = makeStyles({
     width:'95%',
     margin: '0 auto',
   },
+  appBar: {
+    position: 'relative',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+}));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const styles = (theme) => ({
@@ -105,7 +125,7 @@ const DialogActions = withStyles((theme) => ({
 
 function Camas(props) {
   const {camas} = props
-  var {paciente} = props
+  var {paciente, internado} = props
   const{internaciones} = props
   const [state, setState] = React.useState({
     existe: null,
@@ -118,12 +138,23 @@ function Camas(props) {
   const [id, setId] = React.useState('');
   const seccion = props.seccion
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [openNP, setOpenNP] = React.useState(false);
   const docu = ['DNI' , 'CI', 'LE', 'LC'];
+  const [open, setOpen] = React.useState(false);
+  const [camaI, setCamaI ] = React.useState();
+
+  const handleClickOpen = (event) => {
+    setOpen(true);
+    setCamaI(event.target.id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   //al abrir un <Dialog/>
 
-  const handleClickOpen = (event) => {
+  const handleClickOpenNP = (event) => {
     setState({
       existe:false,
       texto: "Por favor, ingrese el documento del paciente",
@@ -131,12 +162,12 @@ function Camas(props) {
       confirmacion: null,
       noBD: false,
     });
-    setOpen(true);
+    setOpenNP(true);
     setId(event.target.id);
   };
 
   //al cerrar un <Dialog/>
-  const handleClose = () => {
+  const handleCloseNP = () => {
     if(props.paciente!=null){
       props.paciente[0]=null;
     }
@@ -147,7 +178,7 @@ function Camas(props) {
       confirmacion: null,
       noBD: false,
     });
-    setOpen(false);
+    setOpenNP(false);
   };
 
   //al limpiar el TEXTFIELD documento
@@ -189,9 +220,9 @@ function Camas(props) {
     })
     if(!state.existe){
         console.log(id)
-        props.asignarP(paciente[0], id, seccion)
+        props.asignarP(paciente[0], id)
         props.createInternacion(id, paciente[0])
-        handleClose()
+        handleCloseNP()
     }
   }
 
@@ -214,6 +245,16 @@ function Camas(props) {
         state.noBD = true
       }
     }
+  }
+
+//DAR ALTA
+
+  const darAlta = (event) => {
+    props.darAlta(event.target.id);
+    props.liberarCama(camaI);
+    console.log("id inte ---> " + event.target.id);
+    //popover
+    handleClose();
   }
 
   return (
@@ -239,7 +280,7 @@ function Camas(props) {
               </CardContent>
                 <CardActions id={cama.id}>
                   <IconButton id={cama.id} aria-label="internar"
-                  onClick={handleClickOpen}
+                  onClick={handleClickOpenNP}
                   >
                     <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" id={cama.id}>
                       <path id={cama.id}d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
@@ -257,7 +298,8 @@ function Camas(props) {
                     {cama.paciente.Nombre}
                   </Typography>
                    {internaciones && internaciones.map(internacion =>
-                     internacion.cama == cama.id ?
+                     internacion.fechaEgreso == null ?
+                      internacion.cama == cama.id ?
                       <div>
                         <Typography className={classes.pos} color="textSecondary">
                           Ingreso: {internacion.fechaIngreso.toDate().toLocaleString()}
@@ -266,13 +308,19 @@ function Camas(props) {
                           {internacion.estudioPendiente} estudios pendientes
                         </Typography>
                       </div>
+                      :
+                      null
                     :
                     null
                     )}
                 </CardContent>
-                  <CardActions>
-                    <IconButton aria-label="infoP">
-                      <InfoIcon/>
+                  <CardActions id={cama.id}>
+                    <IconButton id={cama.id} onClick={handleClickOpen}>
+                      <span class="MuiIconButton-label" id={cama.id}>
+                        <svg class="MuiSvgIcon-root" id={cama.id} focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                          <path id={cama.id} d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path>
+                        </svg>
+                      </span>
                     </IconButton>
                   </CardActions>
               </Card>
@@ -281,8 +329,8 @@ function Camas(props) {
           : null
           )}
 
-          <Dialog onClose={handleClose} align="center" aria-labelledby="customized-dialog-title" open={open}>
-            <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <Dialog onClose={handleCloseNP} align="center" aria-labelledby="customized-dialog-title" open={openNP}>
+            <DialogTitle id="customized-dialog-title" onClose={handleCloseNP}>
               Asignar un paciente
             </DialogTitle>
             <DialogContent dividers>
@@ -330,7 +378,7 @@ function Camas(props) {
                       to={"/Nuevo-Pac"}>
                       <CheckIcon />
                     </IconButton>
-                    <IconButton aria-label="salir" onClick={handleClose}>
+                    <IconButton aria-label="salir" onClick={handleCloseNP}>
                       <ClearIcon/>
                     </IconButton>
                   </div>
@@ -352,9 +400,43 @@ function Camas(props) {
             }
             </DialogActions>
           </Dialog>
+
+          <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+            {internaciones && internaciones.map(internacion =>
+              internacion.fechaEgreso == null ?
+               internacion.cama == camaI ?
+                  <div>
+                    <AppBar className={classes.appBar}>
+                      <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                          <CloseIcon />
+                        </IconButton>
+                        <Typography variant="h2" color="inherit" align="center" className={classes.title}>
+                          {internacion.paciente.Nombre.toUpperCase()}
+                        </Typography>
+                        <Button autoFocus color="inherit" id={internacion.id} onClick={darAlta}>
+                          <span id={internacion.id} class="MuiButton-label">DAR DE ALTA</span>
+                        </Button>
+                      </Toolbar>
+                    </AppBar>
+                    <List>
+                      <ListItem button>
+                        <ListItemText primary="Phone ringtone" secondary="Titania" />
+                      </ListItem>
+                      <Divider />
+                      <ListItem button>
+                        <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+                      </ListItem>
+                    </List>
+                  </div>
+                :null
+              : null
+            )}
+          </Dialog>
       </Grid>
   );
 }
+
 
 
 const mapStateToProps = (state) => {
@@ -370,8 +452,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) =>{
   return{
     buscar:(dni) => dispatch(buscar(dni)),
-    asignarP: (paciente, id, seccion) => dispatch(asignarP(paciente, id, seccion)),
+    asignarP: (paciente, id) => dispatch(asignarP(paciente, id)),
     createInternacion: (cama, paciente) => dispatch(createInternacion(cama,paciente)),
+    darAlta:(idInt) => dispatch(darAlta(idInt)),
+    liberarCama: (camaI) => dispatch(liberarCama(camaI)),
+
   }
 }
 
