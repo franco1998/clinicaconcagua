@@ -76,6 +76,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  dialogo: {
+    backgroundColor:'#EFF1F3',
+    height:"100%",
+  }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -131,7 +135,7 @@ function Camas(props) {
   const [state, setState] = React.useState({
     existe: null,
     texto:"Por favor, ingrese el documento del paciente",
-    doc:'',
+    doc:'DNI',
     docum:null,
     confirmacion:null,
     noBD:false,
@@ -239,7 +243,7 @@ function Camas(props) {
       });
     }
     else{
-      var dn = document.getElementById("TipoD").value + document.getElementById('documento').value;
+      var dn = document.getElementById("TipoD").value + " " + document.getElementById('documento').value;
       props.buscar(dn);
       if(paciente==null || paciente==''){
         state.confirmacion = "El paciente no se encuentra, desea agregarlo?"
@@ -406,7 +410,7 @@ function Camas(props) {
             {internaciones && internaciones.map(internacion =>
               internacion.fechaEgreso == null ?
                internacion.cama == camaI ?
-                  <div>
+                  <div  className={classes.dialogo}>
                     <AppBar className={classes.appBar}>
                       <Toolbar>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
