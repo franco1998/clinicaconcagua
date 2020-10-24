@@ -8,18 +8,29 @@ export const createInternacion = (cama, paciente) =>{
       cama: cama,
       paciente:paciente,
       fechaIngreso: dia,
-      medico:null,
+      doctor:null,
       fechaEgreso:null,
       estudioPendiente: 0,
       idHoja:null,
     }
-    const med= firestore.collection("Profesional").doc(user.uid)
+    firestore.collection("Profesional").doc(user.uid)
     .get()
     .then((encontrado) => {
-      internacion.medico=encontrado.id;
+      firestore.collection("Profesional").get().then(
+        (query) => {
+          query.forEach((prof) => {
+            if(prof.id == encontrado.id){
+              internacion.doctor = prof.data()
+              console.log(internacion)
+            }
+          });
+
+        }
+      )
       firestore.collection('Internacion').add({
         ...internacion,
       }).then(() => {
+        console.log(internacion);
         dispatch({type:'CREATE_INTERNACION', internacion});
       }).catch((err)=>{
         dispatch({type: 'CREATE_INTERNACION_ERROR', err});

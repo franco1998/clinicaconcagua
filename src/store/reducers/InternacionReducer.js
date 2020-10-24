@@ -6,7 +6,7 @@ const initState = {
 const InternacionReducer = (state = initState, action) =>{
   switch (action.type) {
     case 'CREATE_INTERNACION':
-      console.log('Internacion creado');
+      console.log('Internacion creado', action.internacion);
       return state;
     case 'CREATE_INTERNACION_ERROR':
       console.log('Error', action.err);

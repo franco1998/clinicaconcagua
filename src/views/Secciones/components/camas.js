@@ -31,6 +31,7 @@ import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
+import InfoPaciente from './Expandido/Componentes/InfoPaciente.js';
 import { Link as RouterLink } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -419,15 +420,7 @@ function Camas(props) {
                         </Button>
                       </Toolbar>
                     </AppBar>
-                    <List>
-                      <ListItem button>
-                        <ListItemText primary="Phone ringtone" secondary="Titania" />
-                      </ListItem>
-                      <Divider />
-                      <ListItem button>
-                        <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-                      </ListItem>
-                    </List>
+                    <InfoPaciente internacion={internacion}/>
                   </div>
                 :null
               : null
