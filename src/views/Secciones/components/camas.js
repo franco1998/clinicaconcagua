@@ -31,6 +31,7 @@ import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Slide from '@material-ui/core/Slide';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import InfoPaciente from './Expandido/Componentes/InfoPaciente.js';
 import { Link as RouterLink } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
@@ -83,6 +84,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const TransitionIP = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
@@ -147,6 +152,7 @@ function Camas(props) {
   const docu = ['DNI' , 'CI', 'LE', 'LC'];
   const [open, setOpen] = React.useState(false);
   const [camaI, setCamaI ] = React.useState();
+  const [openIP, setOpenIP] = React.useState(false);
 
   const handleClickOpen = (event) => {
     setOpen(true);
@@ -261,6 +267,18 @@ function Camas(props) {
     //popover
     handleClose();
   }
+
+//Informacion sobre el Paciente
+
+
+  const handleClickOpenIP = () => {
+    setOpenIP(true);
+  };
+
+  const handleCloseIP = () => {
+    setOpenIP(false);
+  };
+
 
   return (
       <Grid container spacing={3}>
@@ -416,7 +434,7 @@ function Camas(props) {
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                           <CloseIcon />
                         </IconButton>
-                        <Typography variant="h2" color="inherit" align="center" className={classes.title}>
+                        <Typography variant="h2" color="inherit" align="center" className={classes.title} onClick={handleClickOpenIP}>
                           {internacion.paciente.Nombre.toUpperCase()}
                         </Typography>
                         <Button autoFocus color="inherit" id={internacion.id} onClick={darAlta}>
@@ -425,10 +443,35 @@ function Camas(props) {
                       </Toolbar>
                     </AppBar>
                     <InfoPaciente internacion={internacion}/>
+
+                    <Dialog
+                      open={openIP}
+                      TransitionComponent={TransitionIP}
+                      keepMounted
+                      onClose={handleCloseIP}
+                      aria-labelledby="alert-dialog-slide-title"
+                      aria-describedby="alert-dialog-slide-description"
+                    >
+                      <DialogTitle id="alert-dialog-slide-title">{internacion.paciente.Nombre}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                          DNI: {internacion.paciente.Documento}
+                          <br/>
+                          DIRECCION: {internacion.paciente.Direccion}
+                          Mas informacion!!!!
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleCloseIP} color="primary">
+                          Cerrar
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </div>
                 :null
-              : null
+              : null,
             )}
+
           </Dialog>
       </Grid>
   );

@@ -24,9 +24,6 @@ export const createInternacion = (cama, paciente) =>{
               console.log(internacion)
             }
           });
-
-        }
-      )
       firestore.collection('Internacion').add({
         ...internacion,
       }).then(() => {
@@ -34,7 +31,7 @@ export const createInternacion = (cama, paciente) =>{
         dispatch({type:'CREATE_INTERNACION', internacion});
       }).catch((err)=>{
         dispatch({type: 'CREATE_INTERNACION_ERROR', err});
-      })
+      })})
     });
   }
 };

@@ -3,7 +3,7 @@ const initState = {
   Paciente: null,
 };
 
-const PacientesReducer = (state = initState, action) =>{
+const DiagnosticoReducer = (state = initState, action) =>{
   switch (action.type) {
     case 'CREATE_CAMA':
       console.log('Cama creada', action.paciente);

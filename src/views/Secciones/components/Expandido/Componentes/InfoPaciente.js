@@ -11,8 +11,14 @@ import { Card,
          Divider,
          Accordion,
          AccordionDetails,
-         AccordionSummary } from '@material-ui/core';
+         AccordionSummary,
+         TextField } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {NuevoDiag} from '../../../../../store/actions/DiagnosticoActions.js';
+import {extraer} from '../../../../../store/actions/DiagnosticoActions.js';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 const useStyles = makeStyles( theme =>({
   root: {
@@ -59,17 +65,40 @@ const useStyles = makeStyles( theme =>({
   },
 }));
 
-export default function InfoPaciente(props) {
+function InfoPaciente(props) {
   const classes = useStyles();
-  const { internacion } = props;
+  const { internacion, diagnosticos} = props;
+  var diagnosticosI = [];
   const [expanded, setExpanded] = React.useState(false);
+  const [state, setState ] = React.useState({
+    detalle:false,
+    textoDetalle:'',
+  })
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const cambiar = () =>{
+    if(document.getElementById("detalle").value!=null){
+      props.NuevoDiag(internacion.id, document.getElementById("detalle").value);
+    }
+  }
+
+  const filtrar = () =>{
+    if(diagnosticos != null){
+      diagnosticos.map(diagnostico =>
+      diagnostico.internacion== internacion.id?
+      diagnosticosI.push(diagnostico)
+    :
+    null
+  )
+    }
+  }
+
   return (
     <div className={classes.container}>
+    {props.extraer(internacion.id)}
            <Grid container spacing={4}>
               <Grid item lg={8} md={12} xl={9} xs={12}>
               <Card
@@ -79,15 +108,34 @@ export default function InfoPaciente(props) {
                   />
                   <Divider />
                   <CardContent>
+                  { filtrar(),
+                    diagnosticosI ==  '' ?
                     <Typography>
-                      Bla Bla
+                      Aun no se ha establecido un diagnostico.
                     </Typography>
+                    :
+                    diagnosticosI.map(diagnostico =>
+                    <Typography>
+                      {diagnostico.fecha.toDate().toLocaleString()}     {diagnostico.detalle}
+                    </Typography>
+                  )
+                }
                   </CardContent>
+                  <TextField
+                    error={state.detalle}
+                    id="detalle"
+                    label="Detalle"
+                    helperText={state.textoDetalle}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
                   <CardActions className={classes.actions}>
                     <Button
                       color="primary"
                       size="small"
                       variant="text"
+                      onClick={cambiar}
                     >
                       Cambiar
                     </Button>
@@ -152,3 +200,23 @@ export default function InfoPaciente(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    diagnosticos: state.diagnostico.Diagnosticos,
+  }
+}
+
+const mapDispatchToProps= (dispatch) =>{
+  return{
+    NuevoDiag:(idInt, detalle) => dispatch(NuevoDiag(idInt, detalle)),
+    extraer:(idInt) => dispatch(extraer(idInt)),
+  }
+}
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    {collection: 'Diagnostico'},
+  ])
+)(InfoPaciente);
