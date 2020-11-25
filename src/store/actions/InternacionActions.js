@@ -12,6 +12,11 @@ export const createInternacion = (cama, paciente) =>{
       fechaEgreso:null,
       estudioPendiente: 0,
       idHoja:null,
+      alimentacion:{
+        medico:null,
+        detalle:null,
+        fechaCambio:null,
+      }
     }
     firestore.collection("Profesional").doc(user.uid)
     .get()
@@ -62,3 +67,33 @@ export const darAlta = (id) =>{
     });
   }
 }
+
+export const cambiarAlim = (idInternacion, detalle) => {
+  return( dispatch, getState, {getFirebase, getFirestore}) =>{
+    const firestore= getFirestore();
+    const firebase = getFirebase();
+    const dia=new Date();
+    const alimentacion = {
+        medico:null,
+        detalle: detalle,
+        fechaCambio: dia,
+    };
+    const user= firebase.auth().currentUser;
+    firestore.collection("Profesional").doc(user.uid)
+    .get()
+    .then((encontrado) => {
+      firestore.collection("Profesional").get().then(
+        (query) => {
+          query.forEach((prof) => {
+            if(prof.id == encontrado.id){
+              alimentacion.medico = prof.data()
+            }
+          });
+      firestore.collection('Internacion').doc(idInternacion).update("alimentacion", alimentacion)
+      .then(() => {
+        dispatch({type:'CAMBIAR_ALIMENTACION', alimentacion});
+      }).catch((err)=>{
+        dispatch({type: 'CAMBIAR_ALIMENTACION_ERROR', err});
+      })})})
+    }
+  }

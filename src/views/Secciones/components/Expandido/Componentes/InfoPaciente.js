@@ -12,10 +12,13 @@ import { Card,
          Accordion,
          AccordionDetails,
          AccordionSummary,
-         TextField } from '@material-ui/core';
+         TextField,
+         Select,
+         MenuItem} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {NuevoDiag} from '../../../../../store/actions/DiagnosticoActions.js';
 import {extraer} from '../../../../../store/actions/DiagnosticoActions.js';
+import {cambiarAlim} from '../../../../../store/actions/InternacionActions.js';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -73,7 +76,10 @@ function InfoPaciente(props) {
   const [state, setState ] = React.useState({
     detalle:false,
     textoDetalle:'',
+    alim:'Solidos',
   })
+
+  const comidas = ['Solidos' , 'Blandos'];
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -94,6 +100,14 @@ function InfoPaciente(props) {
     null
   )
     }
+  }
+
+  const CambiarAl = () =>{
+    props.cambiarAlim(internacion.id, state.alim);
+  }
+
+  const handleChangeD = event => {
+    state.alim = event.target.value
   }
 
   return (
@@ -149,15 +163,36 @@ function InfoPaciente(props) {
                   />
                   <Divider />
                   <CardContent>
+                    { internacion.alimentacion == null ?
+                      <Typography>
+                        Aun no se ha establecido un regimen alimenticio.
+                      </Typography>
+                    :
                     <Typography>
-                      bla bla
+                     {internacion.alimentacion.detalle}
                     </Typography>
+                  }
                   </CardContent>
                   <CardActions className={classes.actions}>
+                    <Select
+                      value={state.alim}
+                      fullWidth
+                      error={state.alimen}
+                      onChange={handleChangeD}
+                      inputProps={{
+                        name: "alim",
+                        id: 'Alimentacion',
+                      }}
+                    >
+                    {comidas.map((label, index) => (
+                        <MenuItem value={label}>{label}</MenuItem>
+                    ))}
+                    </Select>
                     <Button
                       color="primary"
                       size="small"
                       variant="text"
+                      onClick={CambiarAl}
                     >
                       Cambiar
                     </Button>
@@ -211,6 +246,7 @@ const mapDispatchToProps= (dispatch) =>{
   return{
     NuevoDiag:(idInt, detalle) => dispatch(NuevoDiag(idInt, detalle)),
     extraer:(idInt) => dispatch(extraer(idInt)),
+    cambiarAlim:(idInt, detalle) => dispatch(cambiarAlim(idInt, detalle))
   }
 }
 

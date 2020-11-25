@@ -21,6 +21,14 @@ const InternacionReducer = (state = initState, action) =>{
     case 'ERROR_ALTA':
       console.log("El paciente no fue dado de alta", action.err);
       return state;
+      break;
+    case 'CAMBIAR_ALIMENTACION':
+      console.log("La alimentacion fue cambiada.");
+      break;
+    case 'CAMBIAR_ALIMENTACION_ERROR':
+      console.log("Error al cambiar la alimentacion", action.err);
+      return state;
+      break;
     default:
       return state;
   }
