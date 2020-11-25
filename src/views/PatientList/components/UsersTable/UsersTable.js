@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
   },
   nameContainer: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent:'center'
   },
   avatar: {
     marginRight: theme.spacing(2)
@@ -79,7 +80,7 @@ const UsersTable = props => {
               </TableHead>
               <TableBody>
                 { users == null ?
-                  <Progress/>
+                  <Progress className={classes.nameContainer}/>
                   :
                    users.map(user => (
                   <TableRow

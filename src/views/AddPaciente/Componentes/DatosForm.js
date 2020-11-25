@@ -1,5 +1,6 @@
-
 import React from 'react';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -8,148 +9,161 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import DateFnsUtils from '@date-io/date-fns';
+import { connect } from 'react-redux';
+import {buscar} from '../../../store/actions/PatientsActions.js'
 import esp from 'date-fns/locale/es';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-class DatosForm extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      Doc:'-',
-      OSocial:'-',
-      selectedDate: new Date(),
-      Docu: ['DNI' , 'CI', 'LE', 'LC'],
-      ObS: ['PAMI', 'OSDE'],
-      paciente: props.paciente,
-    }
-  }
+function DatosForm (props)  {
+  const [Doc,setDoc] = React.useState('-')
+  const [OSocial , setOSocial] = React.useState('-')
+  const [selectedDate , setSelectedDate] = React.useState(new Date())
+  const Docu= ['DNI' , 'CI', 'LE', 'LC']
+  const Obs = ['PAMI', 'OSDE']
+  const paciente = props.paciente
+  const {pacienteE} = props
+  const [state, setState] = React.useState({
+      Nombre:false,
+      Apellido:false,
+      DNI:false,
+      Direccion:false,
+      Nafiliado:false,
+      ART:false,
+      Nsiniestro:false,
+    });
 
-  agregar (){
-    // expresion regular para solo letras
-    var er_string = new RegExp("[A-Za-z]$")
-    // expresion regular para numeros
-    var er_num = new RegExp("[0-9]$")
+const validacion = (event) => {
+      // expresion regular para solo letras
+      var er_string = new RegExp("[A-Za-z]$")
+      // expresion regular para numeros
+      var er_num = new RegExp("[0-9]$")
 
-    var x;
+      var x;
+      switch (event.target.id) {
+        case "Nombre":
+          if(document.getElementById('Nombre').value == '' || !er_string.test(document.getElementById('Nombre').value)){
+            setState({
+              Nombre: true,
+            });
+          }else{
+            setState({
+              Nombre:false
+            });
+          }
+          break
+        case 'Apellido':
+          if(document.getElementById('Apellido').value== '' || !er_string.test(document.getElementById('Apellido').value)){
+            setState({
+              Apellido:true
+            })
+          }else{
+            setState({
+              Apellido:false
+            })
+          }
+          break
+        case 'DNI':
+          var dni = document.getElementById('DNI').value
+          var tipo = document.getElementById('TipoD').value
+          var sacandopuntos = dni.split('.')
+          console.log(sacandopuntos)
+          dni = sacandopuntos.join('')
 
-    if(document.getElementById('Nombre').value == '' || !er_string.test(document.getElementById('Nombre').value)){
-      this.setState({
-        Nombre:true
-      })
-      this.state.Nombre = true;
-      console.log("EStado nombre = " + this.state.Nombre)
-    }else{
-      this.setState({
-        Nombre:false
-      })
-      this.state.Nombre = false;
-    }
-    if(document.getElementById('Apellido').value== '' || !er_string.test(document.getElementById('Apellido').value)){
-      this.setState({
-        Apellido:true
-      })
-        this.state.Apellido=true
-    }else{
-      this.setState({
-        Apellido:false
-      })
-      this.state.Apellido=false
+
+          console.log(pacienteE)
+          props.buscar('DNI 41343141')
+          console.log(props)
+          if(dni == '' || !er_num.test(dni) || dni.length < 7 || dni.length > 8  || pacienteE == null){
+            setState({
+              DNI:true
+            })
+          }else{
+            setState({
+              DNI:false
+            })
+          }
+          break
+        case 'Direccion':
+          if(document.getElementById('Direccion').value==''){
+            setState({
+              Direccion:true
+            })
+          }else{
+            setState({
+              Direccion:false
+            })
+          }
+          break
+        case 'Nafiliado':
+          if(document.getElementById('Nafiliado').value == '' || !er_num.test(document.getElementById('Nafiliado').value)){
+            setState({
+              Nafiliado:true
+            })
+          }else{
+            setState({
+              Nafiliado:false
+            })
+          }
+          break
+        case 'ART':
+          if(document.getElementById('ART').value=='' || !er_string.test(document.getElementById('ART').value)){
+            setState({
+              ART:true
+            })
+          }else{
+            setState({
+              ART:false
+            })
+          }
+          break
+        case 'NSiniestro':
+            if(document.getElementById('NSiniestro').value=='' || !er_num.test(document.getElementById('NSiniestro').value)){
+              setState({
+                Nsiniestro:true
+              })
+            }else{
+              setState({
+                Nsiniestro:false
+              })
+            }
+          break;
+      }
+
+      if(!state.Nombre && !state.Apellido && !state.Direccion && !state.Nafiliado && !state.Nsiniestro && !state.DNI && !state.ART){
+        x = true
+        paciente.Nombre = document.getElementById('Nombre').value + " " + document.getElementById('Apellido').value;
+        paciente.Documento = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
+        paciente.FdeNacimiento = selectedDate.getDate() + "/" + (selectedDate.getMonth()+1) + "/" + selectedDate.getFullYear();
+        paciente.Direccion = document.getElementById('Direccion').value;
+        paciente.Osocial = document.getElementById('OSocial').value;
+        paciente.Nafiliado = document.getElementById('Nafiliado').value;
+        paciente.op= document.getElementById('OP').checked;
+        paciente.ART = document.getElementById('ART').value;
+        paciente.Nsiniestro = document.getElementById('NSiniestro').value;
+        paciente.siguiente = true
+      }else{
+        x= false
+      }
+
+       return x
     }
 
-    var dni = document.getElementById('DNI').value
-    var sacandopuntos = dni.split('.')
-    dni = sacandopuntos.join(' ')
-
-    if(dni == '' || !er_num.test(dni) || dni.length < 7 || dni.length > 8 ){
-      this.setState({
-        DNI:true
-      })
-      this.state.DNI=true
-    }else{
-      this.setState({
-        DNI:false
-      })
-      this.state.DNI=false
-    }
-    if(document.getElementById('Direccion').value==''){
-      this.setState({
-        Direccion:true
-      })
-      this.state.Direccion=true
-    }else{
-      this.setState({
-        Direccion:false
-      })
-      this.state.Direccion=false
-    }
-    if(document.getElementById('Nafiliado').value == '' || !er_num.test(document.getElementById('Nafiliado').value)){
-      this.state.Nafiliado=true
-      this.setState({
-        Nafiliado:true
-      })
-    }else{
-      this.setState({
-        Nafiliado:false
-      })
-      this.state.Nafiliado=false
-    }
-    if(document.getElementById('ART').value=='' || !er_string.test(document.getElementById('ART').value)){
-      this.state.ART=true
-      this.setState({
-        ART:true
-      })
-    }else{
-      this.setState({
-        ART:false
-      })
-      this.state.ART=false
-    }
-    if(document.getElementById('NSiniestro').value=='' || !er_num.test(document.getElementById('NSiniestro').value)){
-      this.state.NSiniestro=true
-      this.setState({
-        NSiniestro:true
-      })
-    }else{
-      this.setState({
-        NSiniestro:false
-      })
-      this.state.NSiniestro=false
-    }
-    if(!this.state.Nombre && !this.state.Apellido && !this.state.Direccion && !this.state.Nafiliado && !this.state.NSiniestro && !this.state.DNI && !this.state.ART){
-      x = true
-      this.state.paciente.Nombre = document.getElementById('Nombre').value + " " + document.getElementById('Apellido').value;
-      this.state.paciente.Documento = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
-      this.state.paciente.FdeNacimiento = this.state.selectedDate.getDate() + "/" + (this.state.selectedDate.getMonth()+1) + "/" + this.state.selectedDate.getFullYear();
-      this.state.paciente.Direccion = document.getElementById('Direccion').value;
-      this.state.paciente.Osocial = document.getElementById('OSocial').value;
-      this.state.paciente.Nafiliado = document.getElementById('Nafiliado').value;
-      this.state.paciente.op= false;
-      this.state.paciente.ART = document.getElementById('ART').value;
-      this.state.paciente.Nsiniestro = document.getElementById('NSiniestro').value;
-    }else{
-      x= false
-    }
-
-     return x
-  }
-
-  handleChange = event => {
-    this.setState(oldValues => ({
+const handleChange = event => {
+    setState(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
   };
 
-  handleDateChange = date => {
-    this.setState({
+  const handleDateChange = date => {
+    setState({
       selectedDate:date,
     });
   };
 
-  render(){
     return (
       <React.Fragment>
               <Typography variant="h4" gutterBottom>
@@ -158,40 +172,40 @@ class DatosForm extends React.Component {
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    error = {this.state.Nombre}
-                    helperText={this.state.Nombre ? 'Ingrese solo letras.' : ''}
+                    error = {state.Nombre}
+                    helperText={state.Nombre ? 'Ingrese solo letras.' : ''}
                     required
                     id="Nombre"
                     name="Nombre"
                     label="Nombre/s"
                     fullWidth
-
-                    onChange={this.handleOnChange}
+                    onChange={validacion}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    helperText={this.state.Apellido ? 'Ingrese solo letras.' : ''}
-                    error = {this.state.Apellido}
+                    helperText={state.Apellido ? 'Ingrese solo letras.' : ''}
+                    error = {state.Apellido}
                     id="Apellido"
                     name="Apellido"
                     label="Apellido/s"
                     fullWidth
+                    onChange={validacion}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <InputLabel htmlFor="TipoD">Tipo Doc</InputLabel>
                 <Select
-                  value={this.state.Docu[0]}
-                  onChange={this.handleChange}
+                  value={Docu[0]}
+                  onChange={handleChange}
                   fullWidth
                   inputProps={{
                     name: "Doc",
                     id: 'TipoD',
                   }}
                 >
-                {this.state.Docu.map((label, index) => (
+                {Docu.map((label, index) => (
                     <MenuItem value={label}>{label}</MenuItem>
                 ))}
                 </Select>
@@ -199,8 +213,9 @@ class DatosForm extends React.Component {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    helperText={this.state.DNI ? 'Ingrese solo numeros.' : ''}
-                    error = {this.state.DNI}
+                    helperText={state.DNI ? 'Ingrese solo numeros.' : ''}
+                    error = {state.DNI}
+                    onChange={validacion}
                     id="DNI"
                     name="DNI"
                     label="N° de documento"
@@ -214,7 +229,7 @@ class DatosForm extends React.Component {
                       id="FechaNac"
                       label="Fecha de Nacimiento"
                       format="dd/MM/yyyy"
-                      value={this.state.selectedDate}
+                      value={state.selectedDate}
                       KeyboardButtonProps={{
                         'aria-label': 'change date',
                       }}
@@ -224,26 +239,27 @@ class DatosForm extends React.Component {
                 <Grid item xs={12}>
                   <TextField
                     required
-                    error = {this.state.Direccion}
-                    helperText={this.state.Direccion ? 'Ingrese una direccion.' : ''}
+                    error = {state.Direccion}
+                    helperText={state.Direccion ? 'Ingrese una direccion.' : ''}
                     id="Direccion"
                     name="Direccion"
                     label="Dirección"
                     fullWidth
+                    onChange={validacion}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <InputLabel htmlFor="OSocial">Obra Social</InputLabel>
                   <Select
-                    value={this.state.ObS[0]}
-                    onChange={this.handleChange}
+                    value={Obs[0]}
+                    onChange={handleChange}
                     name="OSocial"
                     fullWidth
                     inputProps={{
                       id: 'OSocial',
                     }}
                   >
-                  {this.state.ObS.map((label, index)=>(
+                  {Obs.map((label, index)=>(
                     <MenuItem value={label}>{label}</MenuItem>
                   ))}
                   </Select>
@@ -251,9 +267,10 @@ class DatosForm extends React.Component {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    error = {this.state.Nafiliado}
-                    helperText={this.state.Nafiliado ? 'Ingrese un nro de afiliado' : ''}
+                    error = {state.Nafiliado}
+                    helperText={state.Nafiliado ? 'Ingrese un nro de afiliado' : ''}
                     fullWidth
+                    onChange={validacion}
                     id="Nafiliado"
                     name="Nafiliado"
                     label="Numero de afiliado"
@@ -264,24 +281,42 @@ class DatosForm extends React.Component {
                     id="ART"
                     name="ART"
                     label="ART"
-                    helperText={this.state.ART ? 'Ingrese solo letras.' : ''}
+                    helperText={state.ART ? 'Ingrese solo letras.' : ''}
                     fullWidth
-                    error = {this.state.ART}
+                    onChange={validacion}
+                    error = {state.ART}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    error = {this.state.NSiniestro}
-                    helperText={this.state.NSiniestro ? 'Ingrese solo numeros' : ''}
+                    onChange={validacion}
+                    error = {state.Nsiniestro}
+                    helperText={state.Nsiniestro ? 'Ingrese solo numeros' : ''}
                     id="NSiniestro"
                     name="NSiniestro"
                     label="Numero de Denuncia o Siniestro"
                     fullWidth
                   />
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                    <FormControlLabel
+                        control={<Checkbox name="OP" id="OP" />}
+                        label="OP"
+                    />
+                </Grid>
               </Grid>
             </React.Fragment>
     );
+}
+const mapStateToProps = (state) => {
+  return{
+    pacienteE : state.paciente.Paciente,
+
   }
 }
-export default DatosForm;
+const mapDispatchToProps = (dispatch) => {
+  return{
+    buscar: (dni)=> dispatch(buscar(dni)),
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(DatosForm);

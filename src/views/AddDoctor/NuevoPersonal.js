@@ -54,6 +54,7 @@ const useStyles = makeStyles(theme => ({
 const steps = ['Nuevo usuario', 'Revisión'];
 
 const personal = {
+  Nombre:'',
   Documento: '',
   Email:'',
   Profesion: '',
@@ -81,9 +82,8 @@ function NuevoPersonal(props) {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
-    if(activeStep !== 2){
-      form.current.agregar();
+    if(activeStep !== 2 && form.current.agregar()){
+      setActiveStep(activeStep + 1);
     }
   };
 
@@ -125,12 +125,26 @@ function NuevoPersonal(props) {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Snackbar variant={'success'} mensaje={"Fue agregado con exito"}/>
+                <Redirect
+                  exact
+                  from="/"
+                  to="/personal"
+                />
+                  <Snackbar variant={'success'} mensaje={"Fue agregado con exito"}/>
                 </React.Fragment>
             ) : (
               <React.Fragment>
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    component={RouterLink}
+                    to={"/personal"}
+                  >
+                  Cancelar
+                  </Button>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
                       Atras

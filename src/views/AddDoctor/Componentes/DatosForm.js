@@ -25,12 +25,84 @@ class DatosForm extends React.Component {
   }
 
  agregar (){
-    this.state.personal.Celular = document.getElementById('Celular').value;
-    this.state.personal.Email = document.getElementById('Email').value;
-    this.state.personal.Documento = document.getElementById('DNI').value;
-    this.state.personal.Profesion = document.getElementById('Profesion').value;
-    this.state.personal.Especialidad = document.getElementById('Especialidad').value;
-    this.state.personal.password=document.getElementById('DNI').value;
+   var er_string = new RegExp("[A-Za-z]$")
+   // expresion regular para numeros
+   var er_num = new RegExp("[0-9]$")
+   // expresion regular para celular
+   var er_cel = new RegExp("^[0-9]{2,3}-? ?[0-9]{6,7}$")
+   //expreion regular para validar Email
+   var er_email = new RegExp('/^(.+\@.+\..+)$/')
+
+   var x;
+
+   if(document.getElementById('Nombre').value == '' || !er_string.test(document.getElementById('Nombre').value)){
+     this.setState({
+       Nombre:true
+     })
+     this.state.Nombre = true
+   }else{
+     this.setState({
+       Nombre:false
+     })
+     this.state.Nombre = false
+   }
+   if(document.getElementById('Celular').value== '' || !er_cel.test(document.getElementById('Celular').value)){
+     this.setState({
+       Celular:true
+     })
+     this.state.Celular = true
+   }else{
+     this.setState({
+       Celular:false
+     })
+     this.state.Celular = false
+   }
+
+   if(document.getElementById('Email').value== '' || !er_email.test(document.getElementById('Email').value)){
+     this.setState({
+       Email:true
+     })
+     this.state.Email = true
+   }else{
+     this.setState({
+       Email:false
+
+     })
+     this.state.Email = false
+   }
+
+   var dni = document.getElementById('DNI').value
+   var sacandopuntos = dni.split('.')
+   dni = sacandopuntos.join(' ')
+
+   if(dni == '' || !er_num.test(dni) || dni.length < 7 || dni.length > 8 ){
+     this.setState({
+       DNI:true
+     })
+     this.state.DNI = true
+   }else{
+     this.setState({
+       DNI:false
+     })
+     this.state.DNI = false
+   }
+
+
+   if(!this.state.Nombre && !this.state.Celular && !this.state.Email && !this.state.DNI){
+     x = true
+     this.state.personal.Nombre = document.getElementById('Nombre').value
+     this.state.personal.Celular = document.getElementById('Celular').value;
+     this.state.personal.Email = document.getElementById('Email').value;
+     this.state.personal.Documento = document.getElementById('DNI').value;
+     this.state.personal.Profesion = document.getElementById('Profesion').value;
+     this.state.personal.Especialidad = document.getElementById('Especialidad').value;
+     this.state.personal.password=document.getElementById('DNI').value;
+   }else{
+     x= false
+   }
+
+    return x
+
   }
 
 
@@ -57,13 +129,27 @@ class DatosForm extends React.Component {
           Datos del nuevo profesional.
         </Typography>
         <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            type='text'
+            id="Nombre"
+            name="Nombre"
+            label="Nombre"
+            error = {this.state.Nombre}
+            helperText={this.state.Nombre ? 'Ingrese un nombre valido.' : ''}
+            fullWidth
+          />
+        </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              type={'number'}
+              type='text'
               id="DNI"
               name="DNI"
               label="N° de documento"
+              error = {this.state.DNI}
+              helperText={this.state.DNI ? 'Ingrese un N° de documento valido.' : ''}
               fullWidth
             />
           </Grid>
@@ -102,7 +188,7 @@ class DatosForm extends React.Component {
           </Grid>
            :
           <Grid item xs={12} sm={6}>
-            <InputLabel htmlFor="TipoD">Especialidad</InputLabel>
+            <InputLabel htmlFor="TipoD" disabled>Especialidad</InputLabel>
               <Select
                 value={this.state.esp}
                 onChange={this.handleChange}
@@ -124,6 +210,8 @@ class DatosForm extends React.Component {
               name="email"
               label="Email"
               fullWidth
+              error = {this.state.Email}
+              helperText={this.state.Email ? 'Ingrese una direccion de email valido.' : ''}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -131,9 +219,10 @@ class DatosForm extends React.Component {
               required
               type={'number'}
               id="Celular"
-              name="Telefono"
               label="Celular"
               fullWidth
+              error = {this.state.Celular}
+              helperText={this.state.Celular ? 'Ingrese un numero de celular valido.' : ''}
             />
           </Grid>
         </Grid>

@@ -69,16 +69,16 @@ const paciente = {
   FdeNacimientoE:'',
   Vinculo:'',
   TelefonoE:'',
+  siguiente:null,
 }
 
-const form = React.createRef();
 
 function getStepContent(step,props) {
   switch (step) {
     case 0:
-      return <DatosForm paciente={paciente} ref={form}/>;
+      return <DatosForm paciente={paciente} />;
     case 1:
-      return <FamForm paciente={paciente} ref={form}/>;
+      return <FamForm paciente={paciente}/>;
     case 2:
       return <Review paciente={paciente}/>;
     default:
@@ -93,8 +93,11 @@ function NuevoPaciente(props) {
 
   const handleNext = () => {
 
-    if(activeStep !== 2 && form.current.agregar()){
+    if(activeStep !== 2 && paciente.siguiente){
           setActiveStep(activeStep + 1);
+          paciente.siguiente = false
+    }else{
+      paciente.siguiente = true
     }
   };
 
@@ -174,14 +177,25 @@ function NuevoPaciente(props) {
                       >
                       Finalizar
                       </Button>
-                     :<Button
+                     : !paciente.siguiente ?
+                      <Button
                         variant="contained"
                         color="primary"
+                        disabled
                         onClick={handleNext}
                         className={classes.button}
                       >
                       Siguiente
-                      </Button>}
+                      </Button>:
+                      <Button
+                         variant="contained"
+                         color="primary"
+                         disabled
+                         onClick={handleNext}
+                         className={classes.button}
+                       >
+                       Siguiente
+                       </Button>}
                 </div>
               </React.Fragment>
             )}

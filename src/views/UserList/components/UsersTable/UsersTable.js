@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
@@ -22,12 +24,16 @@ const useStyles = makeStyles(theme => ({
   content: {
     padding: 0
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
   inner: {
     minWidth: 1050
   },
-  nameContainer: {
-    display: 'flex',
-    alignItems: 'center'
+  progress: {
+      marginLeft: 'auto',
+      marginRight:'auto'
   },
   avatar: {
     marginRight: theme.spacing(2)
@@ -39,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 
 const UsersTable = props => {
   const { className, users, ...rest } = props;
-
+  const [open] = React.useState(true);
   const classes = useStyles();
 
   const [selectedUsers] = useState([]);
@@ -53,7 +59,6 @@ const UsersTable = props => {
   const handleRowsPerPageChange = event => {
     setRowsPerPage(event.target.value);
   };
-
   return (
     <Card
       {...rest}
@@ -72,7 +77,11 @@ const UsersTable = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users && users.map(user => (
+                {users == null ?
+                  <Backdrop className={classes.backdrop} open={open}>
+                    <CircularProgress color="primary" />
+                  </Backdrop>
+                  : users.map(user => (
                   <TableRow
                     className={classes.tableRow}
                     hover
