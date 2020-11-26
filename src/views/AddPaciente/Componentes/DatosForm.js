@@ -23,8 +23,7 @@ function DatosForm (props)  {
   const [selectedDate , setSelectedDate] = React.useState(new Date())
   const Docu= ['DNI' , 'CI', 'LE', 'LC']
   const Obs = ['PAMI', 'OSDE']
-  const paciente = props.paciente
-  const {pacienteE} = props
+  var {paciente, pacienteE} = props;
   const [state, setState] = React.useState({
       Nombre:false,
       Apellido:false,
@@ -41,7 +40,6 @@ const validacion = (event) => {
       // expresion regular para numeros
       var er_num = new RegExp("[0-9]$")
 
-      var x;
       switch (event.target.id) {
         case "Nombre":
           if(document.getElementById('Nombre').value == '' || !er_string.test(document.getElementById('Nombre').value)){
@@ -74,9 +72,9 @@ const validacion = (event) => {
 
 
           console.log(pacienteE)
-          props.buscar('DNI 41343141')
+          props.buscar(tipo + " " + dni)
           console.log(props)
-          if(dni == '' || !er_num.test(dni) || dni.length < 7 || dni.length > 8  || pacienteE == null){
+          if(dni == '' || !er_num.test(dni) || dni.length < 7 || dni.length > 8  || pacienteE[0] != null){
             setState({
               DNI:true
             })
@@ -84,6 +82,7 @@ const validacion = (event) => {
             setState({
               DNI:false
             })
+            pacienteE=null;
           }
           break
         case 'Direccion':
@@ -133,7 +132,6 @@ const validacion = (event) => {
       }
 
       if(!state.Nombre && !state.Apellido && !state.Direccion && !state.Nafiliado && !state.Nsiniestro && !state.DNI && !state.ART){
-        x = true
         paciente.Nombre = document.getElementById('Nombre').value + " " + document.getElementById('Apellido').value;
         paciente.Documento = document.getElementById('TipoD').value + " " + document.getElementById('DNI').value;
         paciente.FdeNacimiento = selectedDate.getDate() + "/" + (selectedDate.getMonth()+1) + "/" + selectedDate.getFullYear();
@@ -145,10 +143,8 @@ const validacion = (event) => {
         paciente.Nsiniestro = document.getElementById('NSiniestro').value;
         paciente.siguiente = true
       }else{
-        x= false
+        paciente.siguiene=false;
       }
-
-       return x
     }
 
 const handleChange = event => {
